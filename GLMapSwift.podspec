@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "GLMapSwift"
-  s.version = "%VERSION%"
+  s.version = "0.8.15"
   s.summary = "GLMapSwift is a swift extensions to the GLMap framework"
   s.description = <<-DESC
 This project contains Swift extensions for GLMap framework.
@@ -13,16 +13,14 @@ DESC
   s.author = { "Evgen Bodunov" => "evgen@getyourmap.com" }
   s.social_media_url = "http://twitter.com/GLMapFramework"
   s.source = {
-    :http => "https://getyourmap.com/account/download/GLMapSwift-#{s.version.to_s}.zip", 
-    :flatten => true 
+    :git => "https://github.com/GLMap/GLMapSwift.git", 
+    :tag => "#{s.version}"
   }
+  s.documentation_url = "https://getyourmap.com/docs/swift/api/#{s.version.to_s}/"
 
   s.dependency 'GLMap', "= #{s.version}"
+  s.source_files = '*.swift'
 
   s.platform = :ios
   s.ios.deployment_target = '8.0'
-  s.vendored_frameworks = "GLMapSwift.framework"
-
-  s.exclude_files = "SwiftDemo"
-  s.module_name = "GLMap"
 end
