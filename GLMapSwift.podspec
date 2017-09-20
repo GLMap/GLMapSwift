@@ -9,7 +9,7 @@ Please check `pod try GLMapSwift` for demo application.
 
 DESC
   s.homepage = "https://getyourmap.com"
-  s.license = { :type => 'Commercial', :text => "Copyright © Evgen Bodunov" }
+  s.license = { :type => 'Apache 2.0' }
   s.author = { "Evgen Bodunov" => "evgen@getyourmap.com" }
   s.social_media_url = "http://twitter.com/GLMapFramework"
   s.source = {
