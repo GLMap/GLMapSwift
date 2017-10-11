@@ -84,15 +84,6 @@ extension GLMapVectorObject {
 
 extension GLMapMarkerData {
     /**
-     Sets location to the marker.
-     
-     @param location New location value
-     */
-    public func setLocation(_ location:GLMapPoint) {
-        GLMapMarkerSetLocation(self, location)
-    }
-
-    /**
      Sets style to the marker. Style indexes returned by `GLMapMarkerStyleCollection`, when new image is added
      
      @param style Index of the style.
