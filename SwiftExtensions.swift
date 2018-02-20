@@ -13,6 +13,10 @@ extension GLMapPoint: Equatable {
     public static func == (lhs: GLMapPoint, rhs: GLMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
+    
+    public init(lat: Double, lon: Double) {
+        self = GLMapPointMakeFromGeoCoordinates(lat, lon)
+    }
 }
 
 extension GLMapGeoPoint: Equatable {
