@@ -147,3 +147,13 @@ extension GLMapBBox {
         return GLMapBBoxCenter(self)
     }
 }
+
+extension GLMapTrackData {
+    /**
+     Initalizes `GLMapTrackData` with array of points
+     @param points Track point array
+    */
+    public convenience init?(points:Array<GLTrackPoint>) {
+        self.init(points: points, count: UInt(points.count))
+    }
+}
