@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = "GLMapSwift"
-  s.version = "0.9.6"
+  s.version = "0.9.7"
   s.summary = "GLMapSwift is a swift extensions to the GLMap framework"
   s.description = <<-DESC
 This project contains Swift extensions for GLMap framework.
