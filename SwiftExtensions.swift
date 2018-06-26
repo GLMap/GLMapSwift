@@ -111,12 +111,13 @@ extension GLMapMarkerData {
 extension GLMapInfo {
     /// Notification is sent when GLMapInfo.state property is changed
     public static let stateChanged = Notification.Name("kGLMapInfoStateChanged");
-    
+}
+
+extension GLMapDownloadTask {
     /// Notification is sent when GLMapInfo.downloadProgress or GLMapInfo.processedProgress property is changed
-    public static let downloadProgress = Notification.Name("kGLMapInfoDownloadProgress");
-    
+    public static let downloadProgress = Notification.Name("kGLMapDownloadTaskProgress");
     /// Notification is sent when map is downloaded
-    public static let downloadFinished = Notification.Name("kGLMapInfoDownloadFinished");
+    public static let downloadFinished = Notification.Name("kGLMapDownloadTaskFinished");
 }
 
 extension GLMapInfoState {
