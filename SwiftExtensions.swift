@@ -134,8 +134,8 @@ extension GLMapInfoState {
 
 extension GLMapBBox {
     /// Returns empty bounding box object
-    public static func empty() -> GLMapBBox {
-        return GLMapBBoxEmpty();
+    public static var empty: GLMapBBox {
+        return GLMapBBoxEmpty;
     }
     
     /// Adds point into bounding box object
@@ -156,5 +156,32 @@ extension GLMapTrackData {
     */
     public convenience init?(points:Array<GLTrackPoint>) {
         self.init(points: points, count: UInt(points.count))
+    }
+}
+
+extension GLMapColor {
+    /// Equals to GLMapColor(red:0, green:0, blue:0, alpha:0);
+    public static var empty: GLMapColor {
+        return GLMapColorEmpty;
+    }
+    
+    /// Returns red color component
+    public var red: UInt8 {
+        return GLMapColorGetRed(self)
+    }
+
+    /// Returns green color component
+    public var green: UInt8 {
+        return GLMapColorGetGreen(self)
+    }
+
+    /// Returns blue color component
+    public var blue: UInt8 {
+        return GLMapColorGetBlue(self)
+    }
+    
+    /// Returns alpha color component
+    public var alpha: UInt8 {
+        return GLMapColorGetAlpha(self)
     }
 }
