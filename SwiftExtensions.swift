@@ -13,7 +13,7 @@ extension GLMapPoint: Equatable {
     public static func == (lhs: GLMapPoint, rhs: GLMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
-    
+
     public init(lat: Double, lon: Double) {
         self = GLMapPointMakeFromGeoCoordinates(lat, lon)
     }
@@ -34,71 +34,72 @@ extension GLMapBBox: Equatable {
 extension GLMapVectorObject {
     /**
      Adds line to vector object
-     
+
      @param line Array of map points
      */
-    public func addLine(_ line:Array<GLMapPoint>) -> Void {
-        __addLine(line, pointCount:line.count)
+    public func addLine(_ line: Array<GLMapPoint>) {
+        __addLine(line, pointCount: line.count)
     }
+
     /**
      Adds geo line to vector object
-     
+
      @param line Array of geo points
      */
-    public func addGeoLine(_ geoLine:Array<GLMapGeoPoint>) -> Void {
-        __addGeoLine(geoLine, pointCount:geoLine.count)
+    public func addGeoLine(_ geoLine: Array<GLMapGeoPoint>) {
+        __addGeoLine(geoLine, pointCount: geoLine.count)
     }
 
     /**
      Adds line to polygon as outer ring
-     
+
      @param line Array of map points
      */
-    public func addPolygonOuterRing(_ polygonOuterRing:Array<GLMapPoint>) -> Void {
-        __addPolygonOuterRing(polygonOuterRing, pointCount:polygonOuterRing.count)
+    public func addPolygonOuterRing(_ polygonOuterRing: Array<GLMapPoint>) {
+        __addPolygonOuterRing(polygonOuterRing, pointCount: polygonOuterRing.count)
     }
-    
+
     /**
      Adds line to polygon as inner ring
-     
+
      @param line Array of map points
      */
-    public func addPolygonInnerRing(_ polygonInnerRing:Array<GLMapPoint>) -> Void {
-        __addPolygonInnerRing(polygonInnerRing, pointCount:polygonInnerRing.count)
+    public func addPolygonInnerRing(_ polygonInnerRing: Array<GLMapPoint>) {
+        __addPolygonInnerRing(polygonInnerRing, pointCount: polygonInnerRing.count)
     }
 
     /**
      Adds geo line to polygon as outer ring
-     
+
      @param line Array of geo points
      */
-    public func addGeoPolygonOuterRing(_ geoPolygonOuterRing:Array<GLMapGeoPoint>) -> Void {
-        __addGeoPolygonOuterRing(geoPolygonOuterRing, pointCount:geoPolygonOuterRing.count)
+    public func addGeoPolygonOuterRing(_ geoPolygonOuterRing: Array<GLMapGeoPoint>) {
+        __addGeoPolygonOuterRing(geoPolygonOuterRing, pointCount: geoPolygonOuterRing.count)
     }
-    
+
     /**
      Adds geo line to polygon as inner ring
-     
+
      @param line Array of map points
      */
-    public func addGeoPolygonInnerRing(_ geoPolygonInnerRing:Array<GLMapGeoPoint>) -> Void {
-        __addGeoPolygonInnerRing(geoPolygonInnerRing, pointCount:geoPolygonInnerRing.count)
+    public func addGeoPolygonInnerRing(_ geoPolygonInnerRing: Array<GLMapGeoPoint>) {
+        __addGeoPolygonInnerRing(geoPolygonInnerRing, pointCount: geoPolygonInnerRing.count)
     }
 }
 
 extension GLMapMarkerData {
     /**
      Sets style to the marker. Style indexes returned by `GLMapMarkerStyleCollection`, when new image is added
-     
+
      @param style Index of the style.
      */
-    public func setStyle(_ style:UInt) {
+    public func setStyle(_ style: UInt) {
         GLMapMarkerSetStyle(self, UInt32(style))
     }
-    
+
     /**
      Sets text to the marker.
-     
+
      @param text Text displayed by marker
      @param offset Offset of the text center relative to the marker center
      @param style Text style
@@ -110,14 +111,14 @@ extension GLMapMarkerData {
 
 extension GLMapInfo {
     /// Notification is sent when GLMapInfo.state property is changed
-    public static let stateChanged = Notification.Name("kGLMapInfoStateChanged");
+    public static let stateChanged = Notification.Name("kGLMapInfoStateChanged")
 }
 
 extension GLMapDownloadTask {
     /// Notification is sent when GLMapInfo.downloadProgress or GLMapInfo.processedProgress property is changed
-    public static let downloadProgress = Notification.Name("kGLMapDownloadTaskProgress");
+    public static let downloadProgress = Notification.Name("kGLMapDownloadTaskProgress")
     /// Notification is sent when map is downloaded
-    public static let downloadFinished = Notification.Name("kGLMapDownloadTaskFinished");
+    public static let downloadFinished = Notification.Name("kGLMapDownloadTaskFinished")
 }
 
 extension GLMapInfoState {
@@ -125,7 +126,7 @@ extension GLMapInfoState {
     public static func > (lhs: GLMapInfoState, rhs: GLMapInfoState) -> Bool {
         return lhs.rawValue > rhs.rawValue
     }
-    
+
     /// Compares two offline map states
     public static func < (lhs: GLMapInfoState, rhs: GLMapInfoState) -> Bool {
         return lhs.rawValue < rhs.rawValue
@@ -135,14 +136,14 @@ extension GLMapInfoState {
 extension GLMapBBox {
     /// Returns empty bounding box object
     public static var empty: GLMapBBox {
-        return GLMapBBoxEmpty;
+        return GLMapBBoxEmpty
     }
-    
+
     /// Adds point into bounding box object
-    public mutating func addPoint(_ point:GLMapPoint) {
-        self = GLMapBBoxAddPoint(self, point);
+    public mutating func addPoint(_ point: GLMapPoint) {
+        self = GLMapBBoxAddPoint(self, point)
     }
-    
+
     /// Returns the center of the bounding box
     public var center: GLMapPoint {
         return GLMapBBoxCenter(self)
@@ -153,8 +154,8 @@ extension GLMapTrackData {
     /**
      Initalizes `GLMapTrackData` with array of points
      @param points Track point array
-    */
-    public convenience init?(points:Array<GLTrackPoint>) {
+     */
+    public convenience init?(points: Array<GLTrackPoint>) {
         self.init(points: points, count: UInt(points.count))
     }
 }
@@ -162,9 +163,9 @@ extension GLMapTrackData {
 extension GLMapColor {
     /// Equals to GLMapColor(red:0, green:0, blue:0, alpha:0);
     public static var empty: GLMapColor {
-        return GLMapColorEmpty;
+        return GLMapColorEmpty
     }
-    
+
     /// Returns red color component
     public var red: UInt8 {
         return GLMapColorGetRed(self)
@@ -179,7 +180,7 @@ extension GLMapColor {
     public var blue: UInt8 {
         return GLMapColorGetBlue(self)
     }
-    
+
     /// Returns alpha color component
     public var alpha: UInt8 {
         return GLMapColorGetAlpha(self)
