@@ -13,7 +13,12 @@ extension GLMapPoint: Equatable {
     public static func == (lhs: GLMapPoint, rhs: GLMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
-
+    
+    /**
+     Creates new GLMapPoint using latitude and longitude (WGS84)
+     @param lat Latitude in degrees
+     @param lon Longitude in degrees
+     */
     public init(lat: Double, lon: Double) {
         self = GLMapPointMakeFromGeoCoordinates(lat, lon)
     }
