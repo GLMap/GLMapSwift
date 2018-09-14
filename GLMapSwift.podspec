@@ -15,6 +15,7 @@ DESC
   s.platform = :ios
   s.ios.deployment_target = '8.0'
   s.documentation_url = "https://getyourmap.com/docs/swift/api/#{s.version.to_s}/"
+  s.swift_version = '3.2'
    
   s.source = {
     :git => "https://github.com/GLMap/GLMapSwift.git", 
