@@ -36,59 +36,23 @@ extension GLMapBBox: Equatable {
     }
 }
 
-extension GLMapVectorObject {
+extension GLMapPointArray {
     /**
-     Adds line to vector object
+     Creates new GLMapPointArray and adds points to it
+     @param lat Latitude in degrees
+     @param lon Longitude in degrees
+     */
+    public convenience init(_ points: Array<GLMapPoint>) {
+        self.init()
+        addPoints(points)
+    }
 
+    /**
+     Adds points to array
      @param line Array of map points
      */
-    public func addLine(_ line: Array<GLMapPoint>) {
-        __addLine(line, pointCount: line.count)
-    }
-
-    /**
-     Adds geo line to vector object
-
-     @param line Array of geo points
-     */
-    public func addGeoLine(_ geoLine: Array<GLMapGeoPoint>) {
-        __addGeoLine(geoLine, pointCount: geoLine.count)
-    }
-
-    /**
-     Adds line to polygon as outer ring
-
-     @param line Array of map points
-     */
-    public func addPolygonOuterRing(_ polygonOuterRing: Array<GLMapPoint>) {
-        __addPolygonOuterRing(polygonOuterRing, pointCount: polygonOuterRing.count)
-    }
-
-    /**
-     Adds line to polygon as inner ring
-
-     @param line Array of map points
-     */
-    public func addPolygonInnerRing(_ polygonInnerRing: Array<GLMapPoint>) {
-        __addPolygonInnerRing(polygonInnerRing, pointCount: polygonInnerRing.count)
-    }
-
-    /**
-     Adds geo line to polygon as outer ring
-
-     @param line Array of geo points
-     */
-    public func addGeoPolygonOuterRing(_ geoPolygonOuterRing: Array<GLMapGeoPoint>) {
-        __addGeoPolygonOuterRing(geoPolygonOuterRing, pointCount: geoPolygonOuterRing.count)
-    }
-
-    /**
-     Adds geo line to polygon as inner ring
-
-     @param line Array of map points
-     */
-    public func addGeoPolygonInnerRing(_ geoPolygonInnerRing: Array<GLMapGeoPoint>) {
-        __addGeoPolygonInnerRing(geoPolygonInnerRing, pointCount: geoPolygonInnerRing.count)
+    public func addPoints(_ points: Array<GLMapPoint>) {
+        addPoints(points, count: UInt(points.count))
     }
 }
 
