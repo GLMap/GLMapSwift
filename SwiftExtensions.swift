@@ -13,15 +13,6 @@ extension GLMapPoint: Equatable {
     public static func == (lhs: GLMapPoint, rhs: GLMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
-    
-    /**
-     Creates new GLMapPoint using latitude and longitude (WGS84)
-     @param lat Latitude in degrees
-     @param lon Longitude in degrees
-     */
-    public init(lat: Double, lon: Double) {
-        self = GLMapPointMakeFromGeoCoordinates(lat, lon)
-    }
 }
 
 extension GLMapGeoPoint: Equatable {
@@ -103,19 +94,9 @@ extension GLMapInfoState {
 }
 
 extension GLMapBBox {
-    /// Returns empty bounding box object
-    public static var empty: GLMapBBox {
-        return GLMapBBoxEmpty
-    }
-
     /// Adds point into bounding box object
     public mutating func addPoint(_ point: GLMapPoint) {
-        self = GLMapBBoxAddPoint(self, point)
-    }
-
-    /// Returns the center of the bounding box
-    public var center: GLMapPoint {
-        return GLMapBBoxCenter(self)
+        self = self.adding(point)
     }
 }
 
@@ -126,32 +107,5 @@ extension GLMapTrackData {
      */
     public convenience init?(points: Array<GLTrackPoint>) {
         self.init(points: points, count: UInt(points.count))
-    }
-}
-
-extension GLMapColor {
-    /// Equals to GLMapColor(red:0, green:0, blue:0, alpha:0);
-    public static var empty: GLMapColor {
-        return GLMapColorEmpty
-    }
-
-    /// Returns red color component
-    public var red: UInt8 {
-        return GLMapColorGetRed(self)
-    }
-
-    /// Returns green color component
-    public var green: UInt8 {
-        return GLMapColorGetGreen(self)
-    }
-
-    /// Returns blue color component
-    public var blue: UInt8 {
-        return GLMapColorGetBlue(self)
-    }
-
-    /// Returns alpha color component
-    public var alpha: UInt8 {
-        return GLMapColorGetAlpha(self)
     }
 }
