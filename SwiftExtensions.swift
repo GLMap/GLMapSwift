@@ -99,6 +99,7 @@ extension GLMapBBox {
         self = self.adding(point)
     }
 
+    /// Adds one bounding box into another
     public mutating func add(bbox: GLMapBBox) {
         self = self.adding(bbox.origin)
         self = self.adding(GLMapPoint(x:bbox.origin.x + bbox.size.x, y:bbox.origin.y + bbox.size.y))
