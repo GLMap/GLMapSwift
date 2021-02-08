@@ -9,6 +9,27 @@
 import Foundation
 import GLMap
 
+import SwiftUI
+
+#if os(macOS)
+import AppKit
+public struct GLMapViewUI: NSViewRepresentable {
+    public init() {}
+    public func makeNSView(context: Context) -> GLMapView { return GLMapView() }
+    public func updateNSView(_ nsView: GLMapView, context: Context) {}
+}
+#else
+import UIKit
+/// View ready to use with SwiftUI
+@available(iOS 13.0, *)
+public struct GLMapViewUI: UIViewRepresentable {
+    /// :nodoc:
+    public init() {}
+    public func makeUIView(context: Context) -> GLMapView { return GLMapView() }
+    public func updateUIView(_ uiView: GLMapView, context: Context) {}
+}
+#endif
+
 extension GLMapPoint: Equatable {
     public static func == (lhs: GLMapPoint, rhs: GLMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
