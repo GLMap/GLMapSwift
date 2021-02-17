@@ -9,6 +9,8 @@
 import Foundation
 import GLMap
 
+#if (arch(x86_64) || arch(arm64))
+
 import SwiftUI
 
 #if os(macOS)
@@ -28,6 +30,8 @@ public struct GLMapViewUI: UIViewRepresentable {
     public func makeUIView(context: Context) -> GLMapView { return GLMapView() }
     public func updateUIView(_ uiView: GLMapView, context: Context) {}
 }
+#endif
+
 #endif
 
 extension GLMapPoint: Equatable {
