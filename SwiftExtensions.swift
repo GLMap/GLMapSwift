@@ -34,6 +34,18 @@ public struct GLMapViewUI: UIViewRepresentable {
 
 #endif
 
+extension GLMapManager {
+    #if SWIFT_PACKAGE
+    public static func activate(apiKey: String) {
+        activate(apiKey: apiKey, resources: Bundle.module, storage: nil)
+    }
+    #else
+    public static func activate(apiKey: String) {
+        activate(apiKey: apiKey, resources: nil, storage: nil)
+    }
+    #endif
+}
+
 extension GLMapPoint: Equatable {
     public static func == (lhs: GLMapPoint, rhs: GLMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
