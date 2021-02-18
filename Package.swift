@@ -6,11 +6,10 @@ let package = Package(
     platforms: [
         .macOS(.v10_11), .iOS(.v9)
     ],
-    
     products: [
         .library(
             name: "GLMap",
-            targets: ["GLMapSwift"]),
+            targets: ["GLMap", "GLMapSwift"]),
         .library(
             name: "GLSearch",
             targets: ["GLSearch", "GLMap"]),
@@ -18,14 +17,11 @@ let package = Package(
             name: "GLRoute",
             targets: ["GLRoute", "GLMap"])
     ],
-    //dependencies: [
-        // Dependencies declare other packages that this package depends on.
-    //],
     targets: [
         .target(
             name: "GLMapSwift",
             path: ".",
-            exclude: ["README.md", "LICENSE.txt", "GLMapSwift.podspec", "GLMapSwift-Info.plist", "GLMap.xcframework", "GLSearch.xcframework", "GLRoute.xcframework"],
+            exclude: ["README.md", "LICENSE.txt", "GLMapSwift.podspec", "GLMapSwift-Info.plist"],
             sources: ["SwiftExtensions.swift"],
             resources: [
                 .copy("Resources/world.vm"),
@@ -36,30 +32,18 @@ let package = Package(
         ),
         .binaryTarget(
             name: "GLMap",
-            path: "GLMap.xcframework"
+            url: "https://globus.software/download/GLMap-1.4.0.zip",
+            checksum: "92037b26ee76f7480757ac322a626a78c958428e109b82b8888981bd874eabee"
         ),
         .binaryTarget(
             name: "GLSearch",
-            path: "GLSearch.xcframework"
+            url: "https://globus.software/download/GLSearch-1.4.0.zip",
+            checksum: "e44a3932d0703d1741b30786781934664b89a857346451a6040e8ba3055ab637"
         ),
         .binaryTarget(
             name: "GLRoute",
-            path: "GLRoute.xcframework"
-        )
-//        .binaryTarget(
-//            name: "GLMap",
-//            url: "https://globus.software/download/GLMap-1.4.0.zip",
-//            checksum: "cfa2cb87a498fa7e93c655dbec2834b365714b16491e33863a95eaa17cb04a81"
-//        ),
-//        .binaryTarget(
-//            name: "GLSearch",
-//            url: "https://globus.software/download/GLSearch-1.4.0.zip",
-//            checksum: "8c035bad67d5ee326d898228cdef0c1afe79c11589a8025b188ec1a1e6fd7fce"
-//        ),
-//        .binaryTarget(
-//            name: "GLRoute",
-//            url: "https://globus.software/download/GLRoute-1.4.0.zip",
-//            checksum: "f8466a57d15055d1ec4961af31fcd91c7dedb2895f468de5b06b162a1f0bce94"
-//        )
+            url: "https://globus.software/download/GLRoute-1.4.0.zip",
+            checksum: "321f2bced7ff51083d9e26096d23e5c5657a0ec6a6713d94afc029071a7b085b"
+       )
     ]
 )
