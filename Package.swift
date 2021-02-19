@@ -33,17 +33,17 @@ let package = Package(
         .binaryTarget(
             name: "GLMap",
             url: "https://globus.software/download/GLMap-1.4.0.zip",
-            checksum: "92037b26ee76f7480757ac322a626a78c958428e109b82b8888981bd874eabee"
+            checksum: "15338df0914fdd53ff26abd38919785b692719e313f3f3ec625e6e33c5915f80"
         ),
         .binaryTarget(
             name: "GLSearch",
             url: "https://globus.software/download/GLSearch-1.4.0.zip",
-            checksum: "e44a3932d0703d1741b30786781934664b89a857346451a6040e8ba3055ab637"
+            checksum: "092a198eb2e1083b5ad55f460d9c0c88f53236929186079efc5047529f3c64ff"
         ),
         .binaryTarget(
             name: "GLRoute",
             url: "https://globus.software/download/GLRoute-1.4.0.zip",
-            checksum: "321f2bced7ff51083d9e26096d23e5c5657a0ec6a6713d94afc029071a7b085b"
+            checksum: "88fdda92b207bf5f446299fb4c107a0a5129cc38a8525129f66c2ce73aa201b5"
        )
     ]
 )
