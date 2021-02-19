@@ -106,9 +106,14 @@ extension GLMapMarkerData {
     }
 }
 
+extension GLMapManager {
+    /// Notification is sent when GLMapInfo.state property is changed
+    public static let mapListChanged = Notification.Name(kGLMapListChanhged)
+}
+
 extension GLMapInfo {
     /// Notification is sent when GLMapInfo.state property is changed
-    public static let stateChanged = Notification.Name("kGLMapInfoStateChanged")
+    public static let stateChanged = Notification.Name(kGLMapInfoStateChanged)
 }
 
 extension GLMapDownloadTask {
