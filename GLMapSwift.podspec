@@ -16,12 +16,12 @@ DESC
   s.swift_version = '5.2'
 
   s.platforms = { :ios => "9.0", :osx => "10.13" }
-
+   
   s.source = {
     :git => "https://github.com/GLMap/GLMapSwift.git", 
     :tag => "#{s.version}"
   }
 
+  s.source_files = 'SwiftExtensions.swift'
   s.dependency 'GLMap', "= #{s.version}"
-  s.source_files = '*.swift'
 end
