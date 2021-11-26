@@ -9,40 +9,55 @@
 import Foundation
 import GLMap
 
-#if (arch(x86_64) || arch(arm64))
+#if arch(x86_64) || arch(arm64)
+    import SwiftUI
 
-import SwiftUI
-
-#if os(macOS)
-import AppKit
-public struct GLMapViewUI: NSViewRepresentable {
-    public init() {}
-    public func makeNSView(context: Context) -> GLMapView { return GLMapView() }
-    public func updateNSView(_ nsView: GLMapView, context: Context) {}
-}
-#else
-import UIKit
-/// View ready to use with SwiftUI
-@available(iOS 13.0, *)
-public struct GLMapViewUI: UIViewRepresentable {
-    /// :nodoc:
-    public init() {}
-    public func makeUIView(context: Context) -> GLMapView { return GLMapView() }
-    public func updateUIView(_ uiView: GLMapView, context: Context) {}
-}
-#endif
-
-#endif
-
-extension GLMapManager {
-    #if SWIFT_PACKAGE
-    public static func activate(apiKey: String) {
-        activate(apiKey: apiKey, resources: Bundle.module, storage: nil)
-    }
+    #if os(macOS)
+        import AppKit
+        
+        /// View ready to use with SwiftUI
+        public struct GLMapViewUI: NSViewRepresentable {
+            /// :nodoc:
+            public init() {}
+            public func makeNSView(context _: Context) -> GLMapView { return GLMapView() }
+            public func updateNSView(_: GLMapView, context _: Context) {}
+        }
     #else
-    public static func activate(apiKey: String) {
-        activate(apiKey: apiKey, resources: nil, storage: nil)
-    }
+        import UIKit
+        
+        /// View ready to use with SwiftUI
+        @available(iOS 13.0, *)
+        public struct GLMapViewUI: UIViewRepresentable {
+            /// :nodoc:
+            public init() {}
+            public func makeUIView(context _: Context) -> GLMapView { return GLMapView() }
+            public func updateUIView(_: GLMapView, context _: Context) {}
+        }
+    #endif
+
+#endif
+
+public extension GLMapManager {
+    #if SWIFT_PACKAGE
+        /**
+         Activates map manager with API key.
+         It could be obtained at https://user.getyourmap.com
+         
+         @param apiKey API key
+         */
+        static func activate(apiKey: String) {
+            activate(apiKey: apiKey, resources: Bundle.module, storage: nil)
+        }
+    #else
+        /**
+         Activates map manager with API key.
+         It could be obtained at https://user.getyourmap.com
+
+         @param apiKey API key
+         */
+        static func activate(apiKey: String) {
+            activate(apiKey: apiKey, resources: nil, storage: nil)
+        }
     #endif
 }
 
@@ -64,13 +79,13 @@ extension GLMapBBox: Equatable {
     }
 }
 
-extension GLMapPointArray {
+public extension GLMapPointArray {
     /**
      Creates new GLMapPointArray and adds points to it
      @param lat Latitude in degrees
      @param lon Longitude in degrees
      */
-    public convenience init(_ points: Array<GLMapPoint>) {
+    convenience init(_ points: [GLMapPoint]) {
         self.init()
         addPoints(points)
     }
@@ -79,18 +94,18 @@ extension GLMapPointArray {
      Adds points to array
      @param line Array of map points
      */
-    public func addPoints(_ points: Array<GLMapPoint>) {
+    func addPoints(_ points: [GLMapPoint]) {
         addPoints(points, count: UInt(points.count))
     }
 }
 
-extension GLMapMarkerData {
+public extension GLMapMarkerData {
     /**
      Sets style to the marker. Style indexes returned by `GLMapMarkerStyleCollection`, when new image is added
 
      @param style Index of the style.
      */
-    public func setStyle(_ style: UInt) {
+    func setStyle(_ style: UInt) {
         GLMapMarkerSetStyle(self, UInt32(style))
     }
 
@@ -101,59 +116,59 @@ extension GLMapMarkerData {
      @param offset Offset of the text center relative to the marker center
      @param style Text style
      */
-    public func setText(_ text: String, offset: CGPoint, style: GLMapVectorStyle) {
+    func setText(_ text: String, offset: CGPoint, style: GLMapVectorStyle) {
         GLMapMarkerSetText(self, text, offset, style)
     }
 }
 
-extension GLMapManager {
+public extension GLMapManager {
     /// Notification is sent when GLMapInfo.state property is changed
-    public static let mapListChanged = Notification.Name(kGLMapListChanhged)
+    static let mapListChanged = Notification.Name(kGLMapListChanhged)
 }
 
-extension GLMapInfo {
+public extension GLMapInfo {
     /// Notification is sent when GLMapInfo.state property is changed
-    public static let stateChanged = Notification.Name(kGLMapInfoStateChanged)
+    static let stateChanged = Notification.Name(kGLMapInfoStateChanged)
 }
 
-extension GLMapDownloadTask {
+public extension GLMapDownloadTask {
     /// Notification is sent when GLMapInfo.downloadProgress or GLMapInfo.processedProgress property is changed
-    public static let downloadProgress = Notification.Name("kGLMapDownloadTaskProgress")
+    static let downloadProgress = Notification.Name("kGLMapDownloadTaskProgress")
     /// Notification is sent when map is downloaded
-    public static let downloadFinished = Notification.Name("kGLMapDownloadTaskFinished")
+    static let downloadFinished = Notification.Name("kGLMapDownloadTaskFinished")
 }
 
-extension GLMapInfoState {
+public extension GLMapInfoState {
     /// Compares two offline map states
-    public static func > (lhs: GLMapInfoState, rhs: GLMapInfoState) -> Bool {
+    static func > (lhs: GLMapInfoState, rhs: GLMapInfoState) -> Bool {
         return lhs.rawValue > rhs.rawValue
     }
 
     /// Compares two offline map states
-    public static func < (lhs: GLMapInfoState, rhs: GLMapInfoState) -> Bool {
+    static func < (lhs: GLMapInfoState, rhs: GLMapInfoState) -> Bool {
         return lhs.rawValue < rhs.rawValue
     }
 }
 
-extension GLMapBBox {
+public extension GLMapBBox {
     /// Adds point into bounding box object
-    public mutating func add(point: GLMapPoint) {
-        self = self.adding(point)
+    mutating func add(point: GLMapPoint) {
+        self = adding(point)
     }
 
     /// Adds one bounding box into another
-    public mutating func add(bbox: GLMapBBox) {
-        self = self.adding(bbox.origin)
-        self = self.adding(GLMapPoint(x:bbox.origin.x + bbox.size.x, y:bbox.origin.y + bbox.size.y))
+    mutating func add(bbox: GLMapBBox) {
+        self = adding(bbox.origin)
+        self = adding(GLMapPoint(x: bbox.origin.x + bbox.size.x, y: bbox.origin.y + bbox.size.y))
     }
 }
 
-extension GLMapTrackData {
+public extension GLMapTrackData {
     /**
      Initalizes `GLMapTrackData` with array of points
      @param points Track point array
      */
-    public convenience init?(points: Array<GLTrackPoint>) {
+    convenience init?(points: [GLTrackPoint]) {
         self.init(points: points, count: UInt(points.count))
     }
 }
