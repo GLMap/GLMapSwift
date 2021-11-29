@@ -14,7 +14,7 @@ import GLMap
 
     #if os(macOS)
         import AppKit
-        
+
         /// View ready to use with SwiftUI
         public struct GLMapViewUI: NSViewRepresentable {
             /// :nodoc:
@@ -24,7 +24,7 @@ import GLMap
         }
     #else
         import UIKit
-        
+
         /// View ready to use with SwiftUI
         @available(iOS 13.0, *)
         public struct GLMapViewUI: UIViewRepresentable {
@@ -42,7 +42,7 @@ public extension GLMapManager {
         /**
          Activates map manager with API key.
          It could be obtained at https://user.getyourmap.com
-         
+
          @param apiKey API key
          */
         static func activate(apiKey: String) {
