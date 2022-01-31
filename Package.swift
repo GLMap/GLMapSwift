@@ -9,15 +9,15 @@ let package = Package(
     products: [
         .library(
             name: "GLMap",
-            targets: ["GLMap", "GLMapSwift"]
+            targets: ["GLMap", "GLMapCore", "GLMapSwift"]
         ),
         .library(
             name: "GLSearch",
-            targets: ["GLSearch", "GLMap"]
+            targets: ["GLSearch", "GLMapCore"]
         ),
         .library(
             name: "GLRoute",
-            targets: ["GLRoute", "valhalla_micro", "GLMap"]
+            targets: ["GLRoute", "valhalla_micro", "GLMapCore"]
         ),
     ],
     targets: [
@@ -34,19 +34,24 @@ let package = Package(
             swiftSettings: [.define("SWIFT_PACKAGE")]
         ),
         .binaryTarget(
+            name: "GLMapCore",
+            url: "https://globus.software/download/GLMapCore-1.6.0.zip",
+            checksum: "5f1467ea288fa408166cfef500f00e6b5b7fca51c7811bd6e767cf9fa3c358c6"
+        ),
+        .binaryTarget(
             name: "GLMap",
-            url: "https://globus.software/download/GLMap-1.5.0.zip",
-            checksum: "d0bcb7d6db14e9dbfcdd1af8efa2f8a03eb8e6420967436ecfd4dacdd5491aa6"
+            url: "https://globus.software/download/GLMap-1.6.0.zip",
+            checksum: "7f5a173344bdb79750b10be9de6a763350c7bf5b80e37763beb79b571c6206e4"
         ),
         .binaryTarget(
             name: "GLSearch",
-            url: "https://globus.software/download/GLSearch-1.5.0.zip",
-            checksum: "b284d40fd4ce727111892b4b7414eae1494b4c269957301788c31cb7ca0b4b01"
+            url: "https://globus.software/download/GLSearch-1.6.0.zip",
+            checksum: "d575e6a1b6e1c24c714229263d8a16b7a96d4072ecbbbe82f923dcce8808c26c"
         ),
         .binaryTarget(
             name: "GLRoute",
-            url: "https://globus.software/download/GLRoute-1.5.0.zip",
-            checksum: "90a6c9f57011d7327f3684c66a0cef4dfec3b16e48ea487ff9ea1f4e59b1f09e"
+            url: "https://globus.software/download/GLRoute-1.6.0.zip",
+            checksum: "ea02e43e16d121bc8ecde5f19f2f26b8587bd4be340cb966e3b4f999a47d527a"
         ),
         .binaryTarget(
             name: "valhalla_micro",
