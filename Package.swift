@@ -56,7 +56,7 @@ let package = Package(
         .binaryTarget(
             name: "valhalla_micro",
             url: "https://globus.software/download/valhalla_micro-3.1.4.zip",
-            checksum: "d62c5a8c3ee639e3d4297a6363dcbd4c4a59f640f1f2115cf2460f33e5c20cad"
+            checksum: "40fdf9edf63442c8a29d89b0e5df76d8e1e0412ff558da51f2f1b1f756d8d34b"
         ),
     ]
 )
