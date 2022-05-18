@@ -17,7 +17,7 @@ let package = Package(
         ),
         .library(
             name: "GLRoute",
-            targets: ["GLRoute", "valhalla_micro", "GLMapCore"]
+            targets: ["GLRoute", "GLMapCore"]
         ),
     ],
     targets: [
@@ -35,28 +35,23 @@ let package = Package(
         ),
         .binaryTarget(
             name: "GLMapCore",
-            url: "https://globus.software/download/GLMapCore-1.6.0.zip",
-            checksum: "5f1467ea288fa408166cfef500f00e6b5b7fca51c7811bd6e767cf9fa3c358c6"
+            url: "https://globus.software/download/GLMapCore-1.6.2.zip",
+            checksum: "d4e0888fe2faf91ec29d05692756461b735fef4c14be089cc3836c4123ee5bba"
         ),
         .binaryTarget(
             name: "GLMap",
-            url: "https://globus.software/download/GLMap-1.6.0.zip",
-            checksum: "7f5a173344bdb79750b10be9de6a763350c7bf5b80e37763beb79b571c6206e4"
+            url: "https://globus.software/download/GLMap-1.6.2.zip",
+            checksum: "28779a4dfa826c9c02e0bcda6a1b94ef42ee8af154e869f222310ade898d5c7e"
         ),
         .binaryTarget(
             name: "GLSearch",
-            url: "https://globus.software/download/GLSearch-1.6.0.zip",
-            checksum: "d575e6a1b6e1c24c714229263d8a16b7a96d4072ecbbbe82f923dcce8808c26c"
+            url: "https://globus.software/download/GLSearch-1.6.2.zip",
+            checksum: "0cd4c8394b116cd31521af3964e7e0ca0e7e441c607705805fe3653730aafc2f"
         ),
         .binaryTarget(
             name: "GLRoute",
-            url: "https://globus.software/download/GLRoute-1.6.0.zip",
-            checksum: "ea02e43e16d121bc8ecde5f19f2f26b8587bd4be340cb966e3b4f999a47d527a"
-        ),
-        .binaryTarget(
-            name: "valhalla_micro",
-            url: "https://globus.software/download/valhalla_micro-3.1.4.zip",
-            checksum: "40fdf9edf63442c8a29d89b0e5df76d8e1e0412ff558da51f2f1b1f756d8d34b"
+            url: "https://globus.software/download/GLRoute-1.6.2.zip",
+            checksum: "27052d511e11a4d1270612405df7ab33edd4a158c60ffb2a9b4ec5e3743bccb4"
         ),
     ]
 )
