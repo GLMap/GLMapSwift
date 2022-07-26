@@ -133,9 +133,11 @@ public extension GLMapInfo {
 
 public extension GLMapDownloadTask {
     /// Notification is sent when GLMapInfo.downloadProgress or GLMapInfo.processedProgress property is changed
-    static let downloadProgress = Notification.Name("kGLMapDownloadTaskProgress")
-    /// Notification is sent when map is downloaded
-    static let downloadFinished = Notification.Name("kGLMapDownloadTaskFinished")
+    static let downloadProgress = Notification.Name(kGLMapDownloadTaskProgress)
+    /// Notification is sent when download task is started
+    static let downloadTaskStarted = Notification.Name(kGLMapDownloadTaskStarted)
+    /// Notification is sent when download task is finished
+    static let downloadFinished = Notification.Name(kGLMapDownloadTaskFinished)
 }
 
 public extension GLMapInfoState {
