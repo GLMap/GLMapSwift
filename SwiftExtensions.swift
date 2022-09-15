@@ -8,34 +8,49 @@
 
 import Foundation
 import GLMap
+import SwiftUI
 
-#if arch(x86_64) || arch(arm64)
-    import SwiftUI
+public typealias GLMapViewBlock = (GLMapView) -> Void
 
-    #if os(macOS)
-        import AppKit
+#if os(macOS)
+    import AppKit
 
-        /// View ready to use with SwiftUI
-        public struct GLMapViewUI: NSViewRepresentable {
-            /// :nodoc:
-            public init() {}
-            public func makeNSView(context _: Context) -> GLMapView { return GLMapView() }
-            public func updateNSView(_: GLMapView, context _: Context) {}
+    /// View ready to use with SwiftUI
+    public struct GLMapViewUI: NSViewRepresentable {
+        private let initCallback: GLMapViewBlock?
+        /// :nodoc:
+        public init(initCallback: GLMapViewBlock? = nil) {
+            self.initCallback = initCallback
         }
-    #else
-        import UIKit
-
-        /// View ready to use with SwiftUI
-        @available(iOS 13.0, *)
-        public struct GLMapViewUI: UIViewRepresentable {
-            /// :nodoc:
-            public init() {}
-            public func makeUIView(context _: Context) -> GLMapView { return GLMapView() }
-            public func updateUIView(_: GLMapView, context _: Context) {}
+        public func makeNSView(context _: Context) -> GLMapView {
+            let rv = GLMapView()
+            if let initCallback = initCallback {
+                initCallback(rv)
+            }
+            return rv
         }
-    #endif
+        public func updateNSView(_: GLMapView, context _: Context) {}
+    }
+#else
+    import UIKit
 
+    /// View ready to use with SwiftUI
+    @available(iOS 13.0, *)
+    public struct GLMapViewUI: UIViewRepresentable {
+        private let initCallback: GLMapViewBlock?
+        /// :nodoc:
+        public init(initCallback:GLMapViewBlock? = nil) { self.initCallback = initCallback  }
+        public func makeUIView(context _: Context) -> GLMapView {
+            let rv = GLMapView()
+            if let initCallback = initCallback {
+                initCallback(rv)
+            }
+            return rv
+        }
+        public func updateUIView(_: GLMapView, context _: Context) {}
+    }
 #endif
+
 
 public extension GLMapManager {
     #if SWIFT_PACKAGE
