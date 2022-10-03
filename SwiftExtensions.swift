@@ -10,6 +10,7 @@ import Foundation
 import GLMap
 import SwiftUI
 
+/// GLMapViewBlock receives `GLMapView` as a param
 public typealias GLMapViewBlock = (GLMapView) -> Void
 
 #if os(macOS)
