@@ -132,6 +132,18 @@ area {
             fill-color: @color_nature_reserve;
         }
     }
+    
+    @if SubStyle != Car
+        |z10-[leisure=nature_reserve] {
+            color: @color_national_park;
+            width: 3pt;
+        }
+        |z9-[boundary=national_park] {
+            color: @color_national_park;
+            width: 2pt;
+        }
+    @endif
+    
     |z13-{
         // заросли кустов
         [natural=scrub] {
@@ -265,7 +277,9 @@ area {
         }
 
         // pier and groyne displayed on top of the water
-        [man_made=pier],[man_made=groyne] {
+        [man_made=pier],
+        [man_made=groyne],
+        [man_made=breakwater] {
             fill-color: @color_ground;
         }
         // dock над домом. т.к. может быть домом
@@ -273,17 +287,6 @@ area {
             fill-color: @color_water;
         }
     }
-
-    @if SubStyle != Car
-        |z10-[leisure=nature_reserve] {
-            color: @color_national_park;
-            width: 3pt;
-        }
-        |z9-[boundary=national_park] {
-            color: @color_national_park;
-            width: 2pt;
-        }
-    @endif
 
     |z11-[aeroway=aerodrome] {
         fill-color: @color_aeroway_aerodrome;
