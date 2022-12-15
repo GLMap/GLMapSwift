@@ -23,6 +23,7 @@ public typealias GLMapViewBlock = (GLMapView) -> Void
         public init(initCallback: GLMapViewBlock? = nil) {
             self.initCallback = initCallback
         }
+
         public func makeNSView(context _: Context) -> GLMapView {
             let rv = GLMapView()
             if let initCallback = initCallback {
@@ -30,6 +31,7 @@ public typealias GLMapViewBlock = (GLMapView) -> Void
             }
             return rv
         }
+
         public func updateNSView(_: GLMapView, context _: Context) {}
     }
 #else
@@ -40,7 +42,7 @@ public typealias GLMapViewBlock = (GLMapView) -> Void
     public struct GLMapViewUI: UIViewRepresentable {
         private let initCallback: GLMapViewBlock?
         /// :nodoc:
-        public init(initCallback:GLMapViewBlock? = nil) { self.initCallback = initCallback  }
+        public init(initCallback: GLMapViewBlock? = nil) { self.initCallback = initCallback }
         public func makeUIView(context _: Context) -> GLMapView {
             let rv = GLMapView()
             if let initCallback = initCallback {
@@ -48,10 +50,10 @@ public typealias GLMapViewBlock = (GLMapView) -> Void
             }
             return rv
         }
+
         public func updateUIView(_: GLMapView, context _: Context) {}
     }
 #endif
-
 
 public extension GLMapManager {
     #if SWIFT_PACKAGE
