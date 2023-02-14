@@ -171,6 +171,9 @@ public extension GLMapInfoState {
 }
 
 public extension GLMapBBox {
+    var isEmpty: Bool {
+        return size.x < 0 || size.y < 0
+    }    
     /// Adds point into bounding box object
     mutating func add(point: GLMapPoint) {
         self = adding(point)
@@ -178,8 +181,10 @@ public extension GLMapBBox {
 
     /// Adds one bounding box into another
     mutating func add(bbox: GLMapBBox) {
-        self = adding(bbox.origin)
-        self = adding(GLMapPoint(x: bbox.origin.x + bbox.size.x, y: bbox.origin.y + bbox.size.y))
+        if !bbox.isEmpty {
+            self = adding(bbox.origin)
+            self = adding(GLMapPoint(x: bbox.origin.x + bbox.size.x, y: bbox.origin.y + bbox.size.y))
+        }
     }
 }
 
