@@ -125,6 +125,7 @@ public extension GLMapInfoState {
 }
 
 public extension GLMapBBox {
+    /// Returns true if bounding box is empty
     var isEmpty: Bool {
         return size.x < 0 || size.y < 0
     }
