@@ -77,8 +77,8 @@ public extension GLMapMarkerData {
 
      @param style Index of the style.
      */
-    func setStyle(_ style: UInt) {
-        GLMapMarkerSetStyle(self, UInt32(style))
+    func setStyle(_ style: UInt32) {
+        GLMapMarkerSetStyle(self, style)
     }
 
     /**
