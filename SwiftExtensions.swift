@@ -88,8 +88,8 @@ public extension GLMapMarkerData {
      @param offset Offset of the text center relative to the marker center
      @param style Text style
      */
-    func setText(_ text: String, offset: CGPoint, style: GLMapVectorStyle) {
-        GLMapMarkerSetText(self, text, offset, style)
+    func setText(_ text: String, alignment: GLMapTextAlignment = .undefined, offset: CGPoint = .zero, style: GLMapVectorStyle) {
+        GLMapMarkerSetText(self, alignment, text, offset, style)
     }
 }
 
