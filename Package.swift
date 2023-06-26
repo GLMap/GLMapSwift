@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "GLMapSwift",
-            targets: ["GLMapCore", "GLMapSwift"]
+            targets: ["GLMapSwift", "GLMapCore"]
         ),
         .library(
             name: "GLMapCore",
@@ -17,7 +17,7 @@ let package = Package(
         ),
         .library(
             name: "GLMap",
-            targets: ["GLMap"]
+            targets: ["GLMap", "GLMapCore"]
         ),
         .library(
             name: "GLSearch",
