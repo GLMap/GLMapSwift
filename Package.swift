@@ -8,6 +8,10 @@ let package = Package(
     ],
     products: [
         .library(
+            name: "GLMapCore",
+            targets: ["GLMapCore"]
+        ),
+        .library(
             name: "GLMap",
             targets: ["GLMap", "GLMapCore", "GLMapSwift"]
         ),
