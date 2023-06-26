@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import GLMap
+import GLMapCore
 
 public extension GLMapManager {
     /**
