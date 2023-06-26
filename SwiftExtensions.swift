@@ -10,27 +10,20 @@ import Foundation
 import GLMap
 
 public extension GLMapManager {
-    #if SWIFT_PACKAGE
-        /**
-         Activates map manager with API key.
-         It could be obtained at https://user.getyourmap.com
+    /**
+     Activates map manager with API key.
+     It could be obtained at https://user.getyourmap.com
 
-         @param apiKey API key
-         */
-        static func activate(apiKey: String) {
-            activate(apiKey: apiKey, resources: Bundle.module, storage: nil)
-        }
-    #else
-        /**
-         Activates map manager with API key.
-         It could be obtained at https://user.getyourmap.com
-
-         @param apiKey API key
-         */
-        static func activate(apiKey: String) {
-            activate(apiKey: apiKey, resources: nil, storage: nil)
-        }
-    #endif
+     @param apiKey API key
+     */
+    static func activate(apiKey: String, resources: Bundle? = nil, storage: String? = nil) {
+#if SWIFT_PACKAGE
+        let res = resources ?? Bundle.module
+#else
+        let res = resources
+#endif
+        activate(withApiKey: apiKey, resourcesBundle: res, andStoragePath: storage)
+    }
 }
 
 extension GLMapPoint: Equatable {

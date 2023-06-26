@@ -15,7 +15,7 @@ DESC
   s.documentation_url = "https://globus.software/docs/swift/api/#{s.version.to_s}/"
   s.swift_version = '5.2'
 
-  s.platforms = { :ios => "11.0", :osx => "11.0" }
+  s.platforms = { :ios => "12.0", :osx => "11.0" }
 
   s.source = {
     :git => "https://github.com/GLMap/GLMapSwift.git",
