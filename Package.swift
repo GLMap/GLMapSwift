@@ -8,16 +8,8 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "GLMapSwift",
-            targets: ["GLMapSwift", "GLMapCore"]
-        ),
-        .library(
-            name: "GLMapCore",
-            targets: ["GLMapCore"]
-        ),
-        .library(
             name: "GLMap",
-            targets: ["GLMap", "GLMapCore"]
+            targets: ["GLMap", "GLMapCore", "GLMapSwift"]
         ),
         .library(
             name: "GLSearch",
@@ -43,23 +35,23 @@ let package = Package(
         ),
         .binaryTarget(
             name: "GLMapCore",
-            url: "https://globus.software/download/snapshot/GLMapCore-1.7.3-76c88f20b.zip",
-            checksum: "b0fe479abdea07f21e85d1b5e39851bf7335aa0215536a3d65f20b00c2df8760"
+            url: "https://globus.software/download/snapshot/GLMapCore-1.7.3-a28ca3b93.zip",
+            checksum: "eae23608b386b6e30f8457272fea37bcbb8cfecc450d4cc526148ad7990a6a02"
         ),
         .binaryTarget(
             name: "GLMap",
-            url: "https://globus.software/download/snapshot/GLMap-1.7.3-76c88f20b.zip",
-            checksum: "f2e5efe3679799135a77006b25b82d4c61dc27cb681ef70880e03b87fdcc4739"
+            url: "https://globus.software/download/snapshot/GLMap-1.7.3-a28ca3b93.zip",
+            checksum: "6d97f8b40d8e7a1d20c1615e0e1fdcbd8e2e3eead934c621da320b0936dad2b5"
         ),
         .binaryTarget(
             name: "GLSearch",
-            url: "https://globus.software/download/snapshot/GLSearch-1.7.3-76c88f20b.zip",
-            checksum: "7e813402684802e09c2adc1713f66bc85cb25e8328e85bfc384800791904651a"
+            url: "https://globus.software/download/snapshot/GLSearch-1.7.3-a28ca3b93.zip",
+            checksum: "8bd6896f28ca61bab6b3aee0cd4c1ccd52d0a2313b5c7f05f944cb61b7a5afd2"
         ),
         .binaryTarget(
             name: "GLRoute",
-            url: "https://globus.software/download/snapshot/GLRoute-1.7.3-76c88f20b.zip",
-            checksum: "23f16b58a3b5d228a05940a22265c0430ef88fd447c7e0bd680b6e2515294352"
+            url: "https://globus.software/download/snapshot/GLRoute-1.7.3-a28ca3b93.zip",
+            checksum: "20d062a09b7e5957671444f1caac1f73d538e2a61252d41623251264246f2be5"
         ),
     ]
 )
