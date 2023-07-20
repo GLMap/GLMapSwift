@@ -1148,7 +1148,7 @@ node,area {
         |z14-[railway=halt],
         |z16-[building=train_station] {
             icon-image:"poi_circle_small.svg";
-            icon-tint:eval(any(tag('colour'), @color_icon_transport));
+            icon-tint: eval(any(colorTransform(tag('colour')), @color_icon_transport));
             text-priority: 6; // выше чем у названий дорог
 
             |z14-{
@@ -1172,7 +1172,7 @@ node,area {
 
         node|z15-[railway=subway_entrance] {
             icon-image:"poi_circle_small.svg";
-            icon-tint:eval(any(tag('colour'), @color_icon_transport));
+            icon-tint:eval(any(colorTransform(tag('colour')), @color_icon_transport));
 
             details-enabled: 0;
             text-priority: 5; // выше чем у названий дорог
