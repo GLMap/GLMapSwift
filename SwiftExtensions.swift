@@ -17,11 +17,11 @@ public extension GLMapManager {
      @param apiKey API key
      */
     static func activate(apiKey: String, resources: Bundle? = nil, storage: String? = nil) {
-#if SWIFT_PACKAGE
-        let res = resources ?? Bundle.module
-#else
-        let res = resources
-#endif
+        #if SWIFT_PACKAGE
+            let res = resources ?? Bundle.module
+        #else
+            let res = resources
+        #endif
         activate(withApiKey: apiKey, resourcesBundle: res, andStoragePath: storage)
     }
 }
