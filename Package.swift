@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "GLMap",
     platforms: [
-        .macOS(.v11), .iOS(.v11),
+        .macOS(.v11), .iOS(.v12),
     ],
     products: [
         .library(
