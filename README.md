@@ -1,22 +1,64 @@
 # GLMapSwift
 
-**GLMapSwift** pod contains Swift extension on top of `GLMap`.
+Unlock a new realm of mapping capabilities with **GLMapSwift**. This robust framework brings you offline maps, lightning-fast search, and navigation functionalities. Whether you're crafting an iOS, macOS or Android application, **GLMapSwift** offer a seamless, high-performance experience.
 
-API reference for Swift extension is located at https://getyourmap.com/docs/swift/api/latest/
+## Features
+- 🌍 *GLMap* - Offline Maps
+- 🔍 *GLSearch* - Ultra-Fast Search
+- 🚗 *GLRoute* - Turn-by-Turn Navigation
+- 🎨 Customizable Styles via MapCSS
+- 🗺 GeoJSON Support
+- 📱 Cross-Platform (iOS, macOS & Android)
+  
+## Installation via Swift Package Manager (SPM)
 
-Swift demo application is located at: https://github.com/GLMap/examples-ios.
+Add the dependency in your `Package.swift`:
 
-## Getting Help
+```swift
+.package(url: "https://github.com/GLMap/GLMapSwift.git", from: "master")
+```
 
-Need help with your code? Write us at [support@getyourmap.com](mailto:support@getyourmap.com)
+## Getting Started
+
+### Obtain API Key
+
+Get your API key from [GLMap User Dashboard](https://user.getyourmap.com/users/sign_in).
+
+### Initialize GLMap
+
+In your `AppDelegate.swift`:
+
+```swift
+GLMapManager.activate(apiKey: <#API key#>)
+```
+
+### Add GLMapView to Your Project
+
+In your ViewController:
+
+```swift
+let mapView = GLMapView()
+view.addSubview(mapView)
+```
+
+## 📚 Documentation
+
+Explore our example projects:
+- 🍏 [iOS Demo Repository](https://github.com/GLMap/examples-ios)
+- 🤖 [Android Demo Repository](https://github.com/GLMap/examples-android)
+
+For detailed documentation and guides, visit [GLMap Documentation](https://globus.software/docs).
 
 ## License
 
-**GLMapSwift** are published under the Apache 2.0 license.  
+Apache 2.0
 
-## Feedback
+## 🙋‍♂️ Need Assistance?
 
-**_If you use GLMap and are happy with it, all we ask is that you please consider sending out a tweet mentioning [@GLMapFramework](https://twitter.com/GLMapFramework) or email [hi@getyourmap.com](mailto:hi@getyourmap.com) to share your thoughts!_**
+Run into issues? We've got you covered. Contact [support@globus.software](mailto:support@globus.software).
 
-**_And if you don't like it, please let us know what you would like improved, so we can fix it!_**
-![analytics](https://www.facebook.com/tr?id=1514826728831437&ev=ReadmeView&noscript=1)
+## 💌 Feedback
+
+Love what you see? Share your thoughts at [hi@globus.software](mailto:hi@globus.software).
+
+**Globus frameworks** is the key to unlocking a high-speed, customizable mapping experience. Get started today! 🌍⚡
