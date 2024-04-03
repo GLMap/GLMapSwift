@@ -106,7 +106,8 @@ area {
         fill-color: @color_hospital;
     }
 
-    |z13-[landuse=cemetery]{
+    |z13-[landuse=cemetery],
+    |z13-[amenity=grave_yard] {
         z-index: -14;
         fill-color: @color_landuse_cemetery;
     }
@@ -156,12 +157,12 @@ area {
             width: 3pt;
         }
         |z9-[boundary=protected_area] {
-            [protected_class=1], [protected_class=1a], [protected_class=1b],
-            [protected_class=2],
-            [protected_class=3],
-            [protected_class=4],
-            [protected_class=5],
-            |z11-[protected_class=6] {
+            [protect_class=1], [protect_class=1a], [protect_class=1b],
+            [protect_class=2],
+            [protect_class=3],
+            [protect_class=4],
+            [protect_class=5],
+            |z11-[protect_class=6] {
                 color: @color_national_park;
                 width: 2pt;
             }
@@ -227,7 +228,10 @@ area {
     @endif
 
     @if SubStyle != Car
-        |z16-[leisure=sports_centre]{
+        |z16-(
+            [leisure=sports_centre],
+            [leisure=fitness_centre]
+        ) {
             z-index: -13;
             fill-color: @color_sports_centre;
         }
@@ -246,7 +250,7 @@ area {
         fill-color: @color_grass;
     }
     |z13-{
-        [landuse=pasture], [landuse=meadow], [landuse=grass], [landuse=greenfield], [natural=grassland], [natural=heath] {
+        [landuse=meadow], [landuse=grass], [landuse=greenfield], [natural=grassland], [natural=heath] {
             z-index: -12;
             fill-color: @color_grass;
         }
@@ -284,15 +288,16 @@ area {
     }
 
     // 0
-    |z5-(
-        [natural=water],
-        [landuse=reservoir]
-    ),
-    |z9-(
-        [natural=bay], // - часто из заливов не вырезают острова. И они в результате тонут под водой.
-        [landuse=basin]
-    ){
-        fill-color: @color_water;
+    |z5-{
+        |z9-[natural=bay], // - часто из заливов не вырезают острова. И они в результате тонут под водой.
+        |z9-[landuse=basin],
+        [natural=water], [landuse=reservoir], [waterway=riverbank] {
+            fill-color: @color_water;
+            [intermittent=yes] {
+                z-index: 1;
+                fill-image: @intermittent_water;
+            }
+        }
     }
 
     |z9-[natural=wetland] {
