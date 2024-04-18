@@ -524,9 +524,24 @@ node,area {
         }
     @endif
 
-    @if Entertaiment
-        |z17-[amenity=arts_centre],
+    @if Culture
+        |z16-[amenity=arts_centre] {
+            icon-image:"poi_arts_centre.svg";
+            icon-tint: @color_icon_tourism;
+            |z17-{
+                text: eval(locTag('name'));
+                text-color: @color_text_tourism;
+            }
+        }
+        
+        |z17-[amenity=community_centre] {
+            icon-image:"poi_community_centre.svg";
+            icon-tint: @color_icon_tourism;
+            text: eval(locTag('name'));
+            text-color: @color_text_tourism;
+        }
     @endif
+    
     @if Culture
         |z15-[tourism=museum],
     @endif
@@ -662,7 +677,7 @@ node,area {
         }
     @endif
 
-    @if Car
+    @if Style == Car
         |z15-{
             [amenity=charging_station] {
                 icon-image:"poi_charging_station.svg";
@@ -734,6 +749,18 @@ node,area {
                 icon-image:"poi_parking.svg";
                 icon-tint: @color_icon_transport;
                 details-enabled: 0;
+                text-priority: -3;
+                |z18-{
+                    text: eval(locTag('name'));
+                    text-color: @color_text_transport;
+                }
+            }
+            
+            node[amenity=parking_entrance] {
+                // parking entrance is often used without parking=underground
+                // todo add more icons for different kinds of parkings
+                icon-image:"poi_garage_parking.svg";
+                icon-tint: @color_icon_transport;
                 text-priority: -3;
                 |z18-{
                     text: eval(locTag('name'));
@@ -1259,6 +1286,14 @@ node,area {
 
             [barrier=gate] {
                 icon-image:"poi_gate.svg";
+            }
+            
+            [barrier=entrance] {
+                icon-image:"poi_barrier_entrance.svg";
+            }
+
+            [barrier=toll_booth] {
+                icon-image:"poi_barrier_toll_booth.svg";
             }
 
             [barrier=lift_gate] {
