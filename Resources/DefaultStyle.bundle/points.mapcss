@@ -184,12 +184,12 @@ node,area {
     @if SubStyle != Car
         area{
             |z9-[boundary=protected_area] {
-                [protected_class=1], [protected_class=1a], [protected_class=1b],
-                [protected_class=2],
-                [protected_class=3],
-                [protected_class=4],
-                [protected_class=5],
-                |z11-[protected_class=6] {
+                [protect_class=1], [protect_class=1a], [protect_class=1b],
+                [protect_class=2],
+                [protect_class=3],
+                [protect_class=4],
+                [protect_class=5],
+                |z11-[protect_class=6] {
                     text: eval(locTag('name'));
                     text-color: @color_national_park_text;
                     text-priority: 4;
@@ -457,7 +457,6 @@ node,area {
 
     @if Hotel
         |z16-(
-            [amenity=hotel],
             [tourism=hotel],
             [tourism=hostel],
             [tourism=motel],
@@ -525,9 +524,24 @@ node,area {
         }
     @endif
 
-    @if Entertaiment
-        |z17-[amenity=arts_centre],
+    @if Culture
+        |z16-[amenity=arts_centre] {
+            icon-image:"poi_arts_centre.svg";
+            icon-tint: @color_icon_tourism;
+            |z17-{
+                text: eval(locTag('name'));
+                text-color: @color_text_tourism;
+            }
+        }
+        
+        |z17-[amenity=community_centre] {
+            icon-image:"poi_community_centre.svg";
+            icon-tint: @color_icon_tourism;
+            text: eval(locTag('name'));
+            text-color: @color_text_tourism;
+        }
     @endif
+    
     @if Culture
         |z15-[tourism=museum],
     @endif
@@ -663,7 +677,7 @@ node,area {
         }
     @endif
 
-    @if Car
+    @if Style == Car
         |z15-{
             [amenity=charging_station] {
                 icon-image:"poi_charging_station.svg";
@@ -686,9 +700,11 @@ node,area {
         |z16-{
             [shop=car_repair],
             [shop=car_parts],
-            [shop=car][service=tyres],
-            [shop=car][service=parts],
-            [shop=car][service=repair] {
+            [shop=car] (
+                [service=tyres],
+                [service=parts],
+                [service=repair]
+            ) {
                 icon-image:"poi_car_service.svg";
                 icon-tint: @color_icon_transport;
                 |z18-{
@@ -696,9 +712,12 @@ node,area {
                     text-color: @color_text_transport;
                 }
             }
+            
             [amenity=car_rental],
-            [shop=car][service=dealer],
-            [shop=car][!service],
+            [shop=car] (
+                [service=dealer],
+                [!service]
+            ),
             [shop=motorcycle] {
                 icon-image:"poi_car_rental.svg";
                 icon-tint: @color_icon_transport;
@@ -707,6 +726,7 @@ node,area {
                     text-color: @color_text_transport;
                 }
             }
+            
             [amenity=car_sharing] {
                 icon-image:"poi_car_sharing.svg";
                 icon-tint: @color_icon_transport;
@@ -715,6 +735,7 @@ node,area {
                     text-color: @color_text_transport;
                 }
             }
+            
             [amenity=car_wash] {
                 icon-image:"poi_car_wash.svg";
                 icon-tint: @color_icon_transport;
@@ -734,11 +755,22 @@ node,area {
                     text-color: @color_text_transport;
                 }
             }
+            
+            node[amenity=parking_entrance] {
+                // parking entrance is often used without parking=underground
+                // todo add more icons for different kinds of parkings
+                icon-image:"poi_garage_parking.svg";
+                icon-tint: @color_icon_transport;
+                text-priority: -3;
+                |z18-{
+                    text: eval(locTag('name'));
+                    text-color: @color_text_transport;
+                }
+            }
         }
     @endif
 
     @if CityService
-        // embassy
         |z16-{
             [office=government] {
                 icon-image:"poi_government.svg";
@@ -751,18 +783,11 @@ node,area {
         }
 
         |z17-{
-            [diplomatic=embassy],
-            [diplomatic=consulate],
-            [amenity=embassy] {
+            [office=diplomatic] (
+                [diplomatic=embassy],
+                [diplomatic=consulate]
+            ) {
                 icon-image:"poi_embassy.svg";
-                icon-tint: @color_icon_offices;
-                |z18-{
-                    text: eval(locTag('name'));
-                    text-color: @color_text_offices;
-                }
-            }
-            [amenity=post_office] {
-                icon-image:"poi_post_office.svg";
                 icon-tint: @color_icon_offices;
                 |z18-{
                     text: eval(locTag('name'));
@@ -774,6 +799,34 @@ node,area {
                 icon-tint: @color_icon_offices;
                 |z18-{
                     text: eval(locTag('name'));
+                    text-color: @color_text_offices;
+                }
+            }
+        }
+    @endif
+    
+    @if Postal
+        |z17-{
+            [amenity=post_office] {
+                icon-image:"poi_post_office.svg";
+                icon-tint: @color_icon_offices;
+                |z18-{
+                    text: eval(locTag('name'));
+                    text-color: @color_text_offices;
+                }
+            }
+            
+            node[amenity=parcel_locker] {
+                icon-image:"poi_parcel_locker.svg";
+                icon-tint: @color_icon_offices;
+                |z18-{
+                    text: eval(any(tag('brand'), tag('operator')));
+                    [operator][ref] {
+                        text: eval(tag('operator') . ' ' . tag('ref'));
+                    }
+                    [brand][ref] {
+                        text: eval(tag('brand') . ' ' . tag('ref'));
+                    }
                     text-color: @color_text_offices;
                 }
             }
@@ -903,9 +956,8 @@ node,area {
                 text: eval(locTag('name'));
                 text-color: @color_text_stores;
             }
-            [shop=jewellery],
             [shop=jewelry] {
-                icon-image:"poi_jewellery.svg";
+                icon-image:"poi_jewelry.svg";
                 icon-tint: @color_icon_stores;
                 text: eval(locTag('name'));
                 text-color: @color_text_stores;
@@ -958,9 +1010,9 @@ node,area {
                 text: eval(locTag('name'));
                 text-color: @color_text_beauty;
             }
+            [amenity=public_bath],
             [shop=massage],
-            [leisure=sauna],
-            [amenity=sauna] {
+            [leisure=sauna] {
                 icon-image:"poi_spa.svg";
                 icon-tint: @color_icon_beauty;
                 text: eval(locTag('name'));
@@ -980,7 +1032,10 @@ node,area {
             }
         }
 
-        |z16-[leisure=sports_centre] {
+        |z16-(
+            [leisure=sports_centre],
+            [leisure=fitness_centre]
+        ) {
             icon-image:"poi_gym.svg";
             icon-tint: @color_icon_activity;
             |z17-{
@@ -1038,7 +1093,6 @@ node,area {
             }
         }
 
-        [leisure=bbq],
         [amenity=bbq] {
             icon-image:"poi_BBQ.svg";
             icon-tint: @color_icon_activity;
@@ -1093,7 +1147,8 @@ node,area {
             details-enabled: 0;
         }
 
-        area|z17-[landuse=cemetery] {
+        area|z17-[landuse=cemetery],
+        area|z17-[amenity=grave_yard] {
             text: eval(locTag('name'));
             text-color: @color_text_transport;
         }
@@ -1150,14 +1205,12 @@ node,area {
 
             |z14-{
                 icon-image:"poi_railway.svg";
-                [transport=subway],
                 [station=subway] {
                     icon-image:"poi_subway.svg";
                     text-priority: 7;
                 }
             }
 
-            |z14-[railway=station][transport=subway],
             |z14-[railway=station][station=subway],
             |z15-[railway=station],
             |z16-[railway=halt],
@@ -1234,6 +1287,14 @@ node,area {
             [barrier=gate] {
                 icon-image:"poi_gate.svg";
             }
+            
+            [barrier=entrance] {
+                icon-image:"poi_barrier_entrance.svg";
+            }
+
+            [barrier=toll_booth] {
+                icon-image:"poi_barrier_toll_booth.svg";
+            }
 
             [barrier=lift_gate] {
                 icon-image:"poi_lift_gate.svg";
@@ -1281,7 +1342,7 @@ node,area {
             text-color: @color_water;
         }
 
-        |z14- [natural=cave_entrance] {
+        |z14-[natural=cave_entrance] {
             icon-image: "poi_cave_entrance.svg";
             icon-tint: @color_icon_peak;
 
@@ -1297,6 +1358,9 @@ node,area {
             [amenity=bicycle_repair_station]
         ) {
             icon-tint: @color_icon_transport;
+            text: eval(cond(locTag('name'), cond(tag('ref'), locTag('name') . ' ' . tag('ref'), locTag('name')), tag('ref')));
+            text-color: @color_text_transport;
+
             [amenity=bicycle_parking] {
                 icon-image: "poi_bike_parking.svg";
             }

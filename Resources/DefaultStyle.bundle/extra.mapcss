@@ -1,0 +1,34 @@
+@if ExtraData // always false
+
+// We need set fake style to keep objects or extra tags in those objects.
+// By default all unused data is optimized from objects, to keep map files thin.
+line{
+    |z13-{
+        [highway][surface] {
+            width: 1px;
+            color: black;
+        }
+    }
+}
+
+// Below we use construction like [natural=wetland][wetland] 
+// to keep wetland tag value, while it's unused in Default.style. Same for other tag pairs.
+area{
+    |z9-{
+        [natural=wetland][wetland],
+        [water][salt] {
+            fill-color: red;
+        }
+    }
+
+    |z13-{
+        [natural],
+        [landuse] {
+            [leaf_type] {
+                fill-color: green;
+            }
+        }
+    }
+}
+
+@endif
