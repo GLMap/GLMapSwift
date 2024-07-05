@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "GLMap",
     platforms: [
-        .macOS(.v11), .iOS(.v12),
+        .macOS(.v11), .iOS(.v13),
     ],
     products: [
         .library(
@@ -35,23 +35,23 @@ let package = Package(
         ),
         .binaryTarget(
             name: "GLMapCore",
-            url: "https://globus.software/download/GLMapCore-1.8.0.zip",
-            checksum: "5f33864a6aff9b03ba7f8493424e1ae06670d1e25c6436f1de035f30f43f12a1"
+            url: "https://globus.software/download/GLMapCore-1.9.0.zip",
+            checksum: "784ffd2df059f511412d82c6d041ced46838114b2cc958fab44fe713ecf493fb"
         ),
         .binaryTarget(
             name: "GLMap",
-            url: "https://globus.software/download/GLMap-1.8.0.zip",
-            checksum: "bcf3ed2cf2cef4c306e7677a387eaf49a7f31f4c4d5bfe6bfcbad2dc43fce34d"
+            url: "https://globus.software/download/GLMap-1.9.0.zip",
+            checksum: "c0d3a3c1c46d5d76c05cc8066c24d7f02bf64f774b692b2596dec6d027d7f3cd"
         ),
         .binaryTarget(
             name: "GLSearch",
-            url: "https://globus.software/download/GLSearch-1.8.0.zip",
-            checksum: "458c61c53ff55467c28ddc5eff7cc10eb324bd3fb409816eedf4b56d7ebde531"
+            url: "https://globus.software/download/GLSearch-1.9.0.zip",
+            checksum: "de45b08fe934eed35a03500e4c5dace38d01215c2e3c9ff30d054d3e19406ddf"
         ),
         .binaryTarget(
             name: "GLRoute",
-            url: "https://globus.software/download/GLRoute-1.8.0.zip",
-            checksum: "b241bb83fb28d873ac685944099e552248dfcad143ae26a642b8550dba4efde9"
+            url: "https://globus.software/download/GLRoute-1.9.0.zip",
+            checksum: "b8fa1207e412226bee670415ee032ee20f79cb6d8008bdef8e4b751666e7b394"
         ),
     ]
 )

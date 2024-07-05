@@ -31,4 +31,16 @@ area{
     }
 }
 
+// To keep this text in 9th zoom level tiles
+node{
+    |z11-(
+        [natural=peak],
+        [natural=saddle],
+        [natural=volcano],
+        [mountain_pass=yes]
+    ) {
+            text: eval(cond(locTag('name'), cond(tag('ele'), locTag('name').' ' . formatElevation(tag('ele')), locTag('name')), formatElevation(tag('ele'))));
+            text-color: @color_text_peak;
+    }
+}
 @endif
