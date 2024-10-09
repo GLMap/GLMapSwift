@@ -101,7 +101,6 @@ node,area {
         text: eval(locTag('name'));
         text-color: @color_suburb_text;
         font-size: 11;
-        font-weight: regular;
         font-stroke-width: 1pt;
     }
 
@@ -555,6 +554,15 @@ node,area {
         icon-image:"poi_museum.svg";
         icon-tint: @color_icon_tourism;
         |z17-{
+            text: eval(locTag('name'));
+            text-color: @color_text_tourism;
+        }
+    }
+
+    |z15-[historic=archaeological_site] {
+        icon-image:"poi_archaeological_site.svg";
+        icon-tint: @color_icon_tourism;
+        |z16- {
             text: eval(locTag('name'));
             text-color: @color_text_tourism;
         }
