@@ -30,6 +30,7 @@
 @color_scrub: #445327;
 @color_orchard: #56631C;
 @color_allotments: #28401E;
+@color_allotments_text: #77B25F;
 @color_playground: #18451F;
 @color_stadium: #376055;
 @color_sports_centre: #021F05;
@@ -51,14 +52,15 @@
 
 @color_label_text: #E0DFDD;
 @color_name_text: #D3D2D0;
-@color_suburb_text: #808384;
+@color_suburb_text: #9A9C9E;
 @color_national_park_text: #ABCA88;
 @color_building_text: #99836B;
 @color_entrance_text: #998167;
 @color_public_transport_text: #C9C9C6;
 @color_private_access_text: #F07573;
 @color_label_stroke: #000000EE;
-@color_water_text: #000000;
+@color_water_text: #CCCCCC;
+@color_water_stroke: #2A80C4BB;
 @color_aerialway_text: #FFFFFF;
 @color_shop_text: #F9D8A3;
 @color_beach_text: #A5997E;
@@ -69,7 +71,7 @@
 @color_difficulty_expert: #FFFFFF;
 @color_difficulty_freeride: #FFA500;
 
-@color_icon_offices: #81C784;
+@color_icon_offices: #80C880;
 @color_text_offices: @color_icon_offices;
 @color_icon_stores: #64B5F6;
 @color_text_stores: @color_icon_stores;
@@ -82,6 +84,7 @@
 @color_icon_health: #E57373;
 @color_text_health: @color_icon_health;
 @color_icon_transport: #90A4AE;
+@color_icon_transport_private: #90A4AEA0;
 @color_text_transport: @color_icon_transport;
 
 @color_icon_hotels: #9575CD;
