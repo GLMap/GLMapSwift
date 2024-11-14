@@ -26,19 +26,19 @@ public extension GLMapManager {
     }
 }
 
-extension GLMapPoint: Equatable {
+extension GLMapPoint: @retroactive Equatable {
     public static func == (lhs: GLMapPoint, rhs: GLMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
 }
 
-extension GLMapGeoPoint: Equatable {
+extension GLMapGeoPoint: @retroactive Equatable {
     public static func == (lhs: GLMapGeoPoint, rhs: GLMapGeoPoint) -> Bool {
         return lhs.lat == rhs.lat && lhs.lon == rhs.lon
     }
 }
 
-extension GLMapBBox: Equatable {
+extension GLMapBBox: @retroactive Equatable {
     public static func == (lhs: GLMapBBox, rhs: GLMapBBox) -> Bool {
         return lhs.origin == rhs.origin && lhs.size == rhs.size
     }

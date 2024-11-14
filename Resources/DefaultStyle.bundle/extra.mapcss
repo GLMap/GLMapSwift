@@ -1,4 +1,4 @@
-@if ExtraData // always false
+@if !HideExtraData // always false
 
 // We need set fake style to keep objects or extra tags in those objects.
 // By default all unused data is optimized from objects, to keep map files thin.
@@ -7,6 +7,11 @@ line {
         [highway][surface] {
             width: 1px;
             color: black;
+        }
+        
+        [power=line] {
+            text: eval(tag('voltage').tag('cables').tag('circuits').tag('operator'));
+            text-color: red;
         }
     }
 }
@@ -39,14 +44,22 @@ node {
         [natural=volcano],
         [mountain_pass=yes]
     ) {
-            text: eval(cond(locTag('name'), cond(tag('ele'), locTag('name').' ' . formatElevation(tag('ele')), locTag('name')), formatElevation(tag('ele'))));
-            text-color: @color_text_peak;
+        text: eval(cond(locTag('name'), cond(tag('ele'), locTag('name').' '.formatElevation(tag('ele')), locTag('name')), formatElevation(tag('ele'))));
+        text-color: red;
     }
     // save names
     |z13-(
         [emergency=defibrillator]
     ) {
         text: eval(locTag('name'));
+        text-color: red;
+    }
+    
+    |z13-(
+        [power=tower],
+        [power=pole]
+    ) {
+        text: eval(tag('operator').tag('ref').tag('design').tag('height'));
         text-color: red;
     }
 }
