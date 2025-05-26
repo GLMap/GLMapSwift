@@ -88,7 +88,7 @@ public extension GLMapMarkerData {
 
 public extension GLMapManager {
     /// Notification is sent when GLMapInfo.state property is changed
-    static let mapListChanged = Notification.Name(kGLMapListChanhged)
+    static let mapListChanged = Notification.Name(kGLMapListChanged)
 }
 
 public extension GLMapInfo {
