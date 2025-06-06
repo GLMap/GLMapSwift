@@ -4,9 +4,9 @@
 @color_ground: #EAE3D3; // s: -0.35
 @color_downloaded_map: #6F00FF33;
 @color_downloaded_map_stroke: #6F00FF;
-@color_water: #64A7DD;
-@color_water_icon: #135386;
-@color_water_underground: #64A7DD66;
+@color_water: #83C3ED;
+@color_water_icon: #1E4F7A;
+@color_water_underground: #99CFF066;
 @color_wood: #A0D788; // l: -0.07
 @color_wood_icon: #3E7326;
 @color_nature_reserve: #BCDB9A30;
@@ -20,15 +20,15 @@
 @color_glacier: #E0F8F7;
 @color_boundary_country: #596570;
 @color_boundary_state: #59657099;
-@color_boundary_other: #A4A8AB99;
+@color_boundary_other: #9C9F9A99;
 @color_mud: #E9DFBF;
 @color_farm: #CFDEC6;
 @color_farmyard: #EDDDCA; // s: -0.15
-@color_sand: #F7ECD2; // l: -0.07
+@color_sand: #F7E7A9; // l: -0.07
 @color_market: #D9E5B3;
 @color_wetland: #95E0B899;
 @color_scrub: #C8D7AB;
-@color_orchard: #C6D876; // l: -0.095
+@color_orchard: #BBD66E; // l: -0.095
 @color_allotments: #C8E0BE;
 @color_allotments_text: #649F4C;
 @color_playground: #B9E6C0;
@@ -49,6 +49,9 @@
 @color_private: #F7AEAD;
 @color_tunnel: #D0D0D0;
 @color_national_park: #ACCB8A;
+@color_power_line: #8C8C8C;
+@color_hunting_stand: #7B6649;
+@color_ferry_route: #3A8FD4;
 
 @color_label_text: #21211F;
 @color_name_text: #2E2D2B;
@@ -59,11 +62,15 @@
 @color_public_transport_text: #383835;
 @color_private_access_text: #8b100e;
 @color_label_stroke: #FFFFFFEE;
-@color_water_text: #FFF; // l: 0.8
-@color_water_stroke: #3A8FD4BB; // water l 63% -> 53% with alpha
+
+@color_water_text: #1E5A8C;
+@color_water_stroke: #FFFFFFB3;
 @color_aerialway_text: #000;
 @color_shop_text: #5B3A05;
-@color_beach_text: #807459;
+@color_sand_text: #72664B;
+@color_landuse_residential_text: #5E574D;
+@color_wetland_text: #1F3F64;
+@color_wetland_stroke: #FFFFFF99;
 
 @color_difficulty_novice: #008000;
 @color_difficulty_easy: #0000FF;
@@ -93,11 +100,14 @@
 @color_text_beauty: #BF5F82; // @color_icon_beauty
 
 @color_icon_tint: #866E54; // same
+@color_text_tint: #6D5640;
 @color_icon_capital_tint: #3A3A3A; // same
 @color_icon_peak: #800000;
 @color_text_peak: #A52A2A;
 @color_icon_volcano: @color_icon_health;
 @color_text_volcano: @color_text_health;
+@color_icon_mine: @color_icon_tint;
+@color_text_mine: @color_text_tint;
 
 // roads of all kinds
 @color_small_road: #FEFEFE; // l: 0.4
@@ -109,9 +119,10 @@
 @color_footway_casing: #fefefe30;
 @color_road_construction: #F7BE81; // l: 0.1
 @color_dashes_casing: #FEFEFE30;
+@color_track_dashes: #8C6F58; // l: 0.1
+@color_track_casing: #fefefe88;
 @if Style == Outdoor
     @color_footway_dashes: #AF756A; // l: 0.1
-    @color_track_dashes: #977868; // l: 0.1
     @if SubStyle == Hike
         @color_path_dashes: @color_track_dashes;
     @else
@@ -132,7 +143,6 @@
 @else
     @color_footway_dashes: #BD9692; // l: 0.1
     @color_path_dashes: @color_footway_dashes;
-    @color_track_dashes: @color_small_road; // l: 0.4
     @color_motorway_casing: #E85; // l: 0.1
     @color_motorway: #F96; // l: 0.1
     @color_trunk_casing: #E96; // l: 0.1
@@ -151,5 +161,6 @@
 
 @color_icon_ford: #0f7cd4;
 @color_text_ford: #0f7cd4;
+@color_icon_fountain: @color_icon_ford;
 
 @color_rock: #a8a8a8;

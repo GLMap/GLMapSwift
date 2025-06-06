@@ -178,13 +178,14 @@ node,area {
         }
     }
 
-    area|z14-[natural=wetland] {
-        text: eval(locTag('name'));
-        text-color: @color_water_text;
-        font-stroke-color: @color_wetland;
-        font-size: 12;
-        font-stroke-width: 2pt;
-        font-weight: light;
+    area|z13-[landuse=residential] {
+        text-color: @color_landuse_residential_text;
+    }
+
+    area|z13-[natural=wetland] {
+        text-color: @color_wetland_text;
+        font-stroke-color: @color_wetland_stroke;
+        font-stroke-width: 1.5pt;
     }
 
     |z9-[place=island],
@@ -213,20 +214,23 @@ node,area {
     }
 
     area|z9-{
-        [boundary=protected_area],
         [boundary=national_park],
-        [leisure=nature_reserve],
-        |z13-(
-            [leisure=park],
-            [leisure=garden],
-            [landuse=allotments]
-        ),
-        [place=island],
-        [natural=bay],
-        [natural=water],
+        [boundary=protected_area],
         [landuse=basin],
         [landuse=reservoir],
+        [leisure=nature_reserve],
+        [natural=bay],
+        [natural=water],
+        [place=island],
         |z13-(
+            [leisure=garden],
+            [leisure=park],
+            [landuse=allotments],
+            [landuse=residential],
+            [landuse=salt_pond],
+            [natural=beach], 
+            [natural=sand],
+            [natural=wetland],
             [place=islet]
         ) {
             // текст пишем для объекта на масштабе polyZoom + 5
@@ -333,6 +337,21 @@ node,area {
         }
     }
 
+    // for nodes similar to polyZoom 9. TODO: use macros to avoid copy-paste?
+    node|z14- {
+        [natural=bay] {
+            text: eval(locTag('name'));
+            text-priority: 5;
+            font-size: 8;
+            |z15-{
+                font-size: 9;
+            }
+            |z16-{
+                font-size: 10;
+            }
+        }
+    }
+
     @if BuildingName
         area|z17-[building],
         |z17-[landuse=construction]
@@ -431,6 +450,18 @@ node,area {
             font-stroke-width:2pt;
             font-stroke-color: @color_ground;
         }
+    }
+
+    |z15-[amenity=hunting_stand] {
+        icon-image: "poi_hunting_stand.svg";
+        icon-tint: @color_hunting_stand;
+        details-enabled: 0;
+    }
+
+    |z16-[man_made=water_tower] {
+        icon-image: "poi_water_tower.svg";
+        icon-tint: @color_hunting_stand;
+        details-enabled: 0;
     }
 
     @if AllShops
@@ -740,19 +771,41 @@ node,area {
             }
         }
 
-        // fountains (no icon)
-        /*
-        node|z16-{
+        node|z18-{
             [artwork_type=fountain], [amenity=fountain] {
                 icon-image:"poi_fountain.svg";
-                icon-tint: @color_building_text;
+                icon-tint: @color_icon_fountain;
+                details-enabled: 0;
             }
         }
-        */
 
     @endif
 
     @if Style == Outdoor
+        node|z15-[tourism=attraction] {
+            icon-image:"poi_tourism_attraction.svg";
+            icon-tint: @color_icon_tourism;
+            icon-scale: 0.7;
+
+            |z16- {
+                icon-scale: 1;
+            }
+
+            |z18-{
+                text: eval(locTag('name'));
+                text-color: @color_text_tourism;
+            }
+        }
+        
+        |z15-[amenity=shelter] {
+            icon-image:"poi_shelter.svg";
+            icon-tint: @color_icon_activity;
+            |z16-{
+                text: eval(locTag('name'));
+                text-color: @color_text_activity;
+            }
+        }
+
         // node|z16-[tourism=attraction], не применяем, потому что это просто маркер для туристических объектов с другими тегами.
         // Можно давать буст в поиске или иконку больше делать - но менять иконку не надо.
         |z16-{
@@ -1209,26 +1262,17 @@ node,area {
         }
     @endif
 
-    |z15-[amenity=shelter] {
-        icon-image:"poi_shelter.svg";
+    |z15-[tourism=picnic_site],
+    node|z16-[leisure=picnic_table] {
+        icon-image:"poi_picnic_table.svg";
         icon-tint: @color_icon_activity;
-        |z16-{
+        |z17-{
             text: eval(locTag('name'));
             text-color: @color_text_activity;
         }
     }
-
+        
     |z16-{
-        [tourism=picnic_site],
-        node[leisure=picnic_table] {
-            icon-image:"poi_picnic_table.svg";
-            icon-tint: @color_icon_activity;
-            |z17-{
-                text: eval(locTag('name'));
-                text-color: @color_text_activity;
-            }
-        }
-
         [leisure=firepit] {
             icon-image:"poi_firepit.svg";
             icon-tint: @color_icon_activity;
@@ -1326,6 +1370,27 @@ node,area {
         }
     }
 
+    node|z14-[power=tower] {
+        icon-image: "poi_power_node.svg";
+        icon-tint: @color_power_line;
+        details-enabled: 0;
+
+        |z16- {
+            icon-scale: 1.5;
+        }
+
+        |z17- {
+            icon-scale: 1;
+            icon-image: "poi_power_tower.svg";
+        } 
+    }
+
+    node|z15-[power=node] {
+        icon-image: "poi_power_node.svg";
+        icon-tint: @color_power_line;
+        details-enabled: 0;
+    }
+
     @if SubStyle != Car
         node|z18-[natural=tree] {
             icon-image: "poi_tree.svg";
@@ -1347,10 +1412,13 @@ node,area {
             text-color: @color_text_transport;
         }
 
-        area|z15-[natural=beach] {
-            text: eval(locTag('name'));
-            text-color: @color_beach_text;
-            font-stroke-color: @color_sand;
+        area|z13-{
+            [natural=beach], 
+            [natural=sand], 
+            [landuse=salt_pond] {
+                text-color: @color_sand_text;
+                font-stroke-color: @color_sand;
+            }
         }
 
         |z17-{
@@ -1433,10 +1501,10 @@ node,area {
     @endif
 
     // water transport
-    |z16-[amenity=ferry_terminal] {
+    |z15-[amenity=ferry_terminal] {
         icon-image:"poi_ferry.svg";
         icon-tint: @color_icon_transport;
-        |z17-{
+        |z16-{
             text: eval(locTag('name'));
             text-color: @color_text_transport;
         }
@@ -1522,11 +1590,21 @@ node,area {
 
         |z14-[natural=cave_entrance] {
             icon-image: "poi_cave_entrance.svg";
-            icon-tint: @color_icon_peak;
+            icon-tint: @color_icon_mine;
 
-            |z16- {
+            |z15- {
                 text: eval(cond(locTag('name'), cond(tag('ele'), locTag('name') . ' ' . formatElevation(tag('ele')), locTag('name')), formatElevation(tag('ele'))));
-                text-color: @color_text_peak;
+                text-color: @color_text_mine;
+            }
+        }
+        
+        |z14-[man_made=adit] {
+            icon-image: "poi_cave_entrance.svg";
+            icon-tint: @color_icon_mine;
+
+            |z15- {
+                text: eval(locTag('name'));
+                text-color: @color_text_mine;
             }
         }
 @if SubStyle == Bike

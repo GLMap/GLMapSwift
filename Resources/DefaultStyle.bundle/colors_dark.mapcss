@@ -4,9 +4,9 @@
 @color_ground: #202020;
 @color_downloaded_map: #6F00FF33;
 @color_downloaded_map_stroke: #6F00FF;
-@color_water: #21659A;
-@color_water_icon: #78B9EB;
-@color_water_underground: #21659A66;
+@color_water: #11527B;
+@color_water_icon: #84B6E0;
+@color_water_underground: #0E456566;
 @color_wood: #315C1F;
 @color_wood_icon: #A4D88B;
 @color_nature_reserve: #45642330;
@@ -20,15 +20,15 @@
 @color_glacier: #061E1D;
 @color_boundary_country: #8E9BA5;
 @color_boundary_state: #8E9BA599;
-@color_boundary_other: #53575A99;
+@color_boundary_other: #61645F99;
 @color_mud: #3F3515;
 @color_farm: #293820;
 @color_farmyard: #2F2417;
-@color_sand: #0E0B02;
+@color_sand: #352B04;
 @color_market: #3F4B19;
 @color_wetland: #1E694199;
 @color_scrub: #445327;
-@color_orchard: #56631C;
+@color_orchard: #576B1E;
 @color_allotments: #28401E;
 @color_allotments_text: #77B25F;
 @color_playground: #18451F;
@@ -49,6 +49,9 @@
 @color_private: #510807;
 @color_tunnel: #2E2E2E;
 @color_national_park: #557433;
+@color_power_line: #727272;
+@color_hunting_stand: #B5A083;
+@color_ferry_route: #2A80C4;
 
 @color_label_text: #E0DFDD;
 @color_name_text: #D3D2D0;
@@ -59,11 +62,15 @@
 @color_public_transport_text: #C9C9C6;
 @color_private_access_text: #F07573;
 @color_label_stroke: #000000EE;
-@color_water_text: #CCCCCC;
-@color_water_stroke: #2A80C4BB;
+
+@color_water_text: #72AFE0;
+@color_water_stroke: #000000B3;
 @color_aerialway_text: #FFFFFF;
 @color_shop_text: #F9D8A3;
-@color_beach_text: #A5997E;
+@color_sand_text: #B3A78C;
+@color_landuse_residential_text: #B1AAA0;
+@color_wetland_text: #9ABBDF;
+@color_wetland_stroke: #00000099;
 
 @color_difficulty_novice: #7FFF7E;
 @color_difficulty_easy: #0000FF;
@@ -93,11 +100,14 @@
 @color_text_beauty: @color_icon_beauty;
 
 @color_icon_tint: #866E54;
+@color_text_tint: #BEA791;
 @color_icon_capital_tint: #3A3A3A;
 @color_icon_peak: #FF7E7F;
 @color_text_peak: #D4595A;
 @color_icon_volcano: @color_icon_health;
 @color_text_volcano: @color_text_health;
+@color_icon_mine: @color_icon_tint;
+@color_text_mine: @color_text_tint;
 
 // roads of all kinds
 @color_small_road: #666666;
@@ -109,9 +119,10 @@
 @color_footway_casing: #00000030;
 @color_road_construction: #AD5F0B;
 @color_dashes_casing: #00000030;
+@color_track_dashes: #BAA492;
+@color_track_casing: #00000088;
 @if Style == Outdoor
     @color_footway_dashes: #AE7469;
-    @color_track_dashes: #AB9286;
     @if SubStyle == Hike
         @color_path_dashes: @color_track_dashes;
     @else
@@ -132,7 +143,6 @@
 @else
     @color_footway_dashes: #8C5A55;
     @color_path_dashes: @color_footway_dashes;
-    @color_track_dashes: @color_small_road; // l: 0.4
     @color_motorway_casing: #D85615;
     @color_motorway: #CB4400;
     @color_trunk_casing: #C65816;
@@ -151,5 +161,6 @@
 
 @color_icon_ford: #2A98EF;
 @color_text_ford: #2A98EF;
+@color_icon_fountain: @color_icon_ford;
 
 @color_rock: #565656;
