@@ -1520,7 +1520,7 @@ node,area {
     }
 
     node{
-        |z17-[barrier][barrier!=kerb] {
+        |z17-[barrier] {
             icon-image:"poi_barrier.svg";
             icon-scale: 0.75;
             icon-tint: @color_icon_tint;
@@ -1530,17 +1530,21 @@ node,area {
             [barrier=gate] {
                 icon-image:"poi_gate.svg";
             }
-            
             [barrier=entrance] {
                 icon-image:"poi_barrier_entrance.svg";
             }
-
             [barrier=toll_booth] {
                 icon-image:"poi_barrier_toll_booth.svg";
             }
-
             [barrier=lift_gate] {
                 icon-image:"poi_lift_gate.svg";
+            }
+            [barrier=bollard] {
+                icon-image: "poi_circle_small.svg";
+                icon-scale: 0.65;
+            }
+            [barrier=kerb] {
+                icon-image: none;
             }
         }
     }
