@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 import GLMapCore
 
 public extension GLMapManager {
@@ -35,6 +36,13 @@ extension GLMapPoint: @retroactive Equatable {
 extension GLMapGeoPoint: @retroactive Equatable {
     public static func == (lhs: GLMapGeoPoint, rhs: GLMapGeoPoint) -> Bool {
         return lhs.lat == rhs.lat && lhs.lon == rhs.lon
+    }
+}
+
+public extension GLMapGeoPoint {
+    /// Convenience initializer bridging from CoreLocation.
+    init(location: CLLocation) {
+        self.init(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
     }
 }
 
