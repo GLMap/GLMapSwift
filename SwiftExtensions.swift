@@ -6,8 +6,8 @@
 //  Copyright © 2016 Evgen Bodunov. All rights reserved.
 //
 
-import Foundation
 import CoreLocation
+import Foundation
 import GLMapCore
 
 public extension GLMapManager {
