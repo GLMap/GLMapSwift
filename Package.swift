@@ -25,7 +25,7 @@ let package = Package(
             name: "GLMapSwift",
             dependencies: ["GLMapCore"],
             path: ".",
-            exclude: ["README.md", "LICENSE.txt", "GLMapSwift.podspec", "GLMapSwift-Info.plist"],
+            exclude: ["README.md", "LICENSE.txt", "GLMapSwift.podspec"],
             sources: ["SwiftExtensions.swift"],
             resources: [
                 .copy("Resources/world.vm"),
