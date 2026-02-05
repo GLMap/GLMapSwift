@@ -23,7 +23,7 @@ let package = Package(
     targets: [
         .target(
             name: "GLMapSwift",
-            dependencies: ["GLMapCore"],
+            dependencies: ["GLMap", "GLMapCore"],
             path: ".",
             exclude: ["README.md", "LICENSE.txt", "GLMapSwift.podspec"],
             sources: ["SwiftExtensions.swift"],

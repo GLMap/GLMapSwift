@@ -8,6 +8,7 @@
 
 import CoreLocation
 import Foundation
+import GLMap
 import GLMapCore
 
 public extension GLMapManager {
@@ -154,3 +155,19 @@ public extension GLMapTrackData {
         self.init(points: points, count: UInt(points.count))
     }
 }
+
+#if swift(>=5.5)
+    @MainActor
+    public extension GLMapView {
+        /// Async/await wrapper around `animate(_:withCompletion:)`.
+        /// - Returns: `true` when the animation finished normally, `false` when it was canceled.
+        @discardableResult
+        func animate(_ animations: (GLMapAnimation) -> Void) async -> Bool {
+            await withCheckedContinuation { continuation in
+                _ = animate(animations, withCompletion: { finished in
+                    continuation.resume(returning: finished)
+                })
+            }
+        }
+    }
+#endif
