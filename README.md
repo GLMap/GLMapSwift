@@ -22,7 +22,7 @@ Add the dependency in your `Package.swift`:
 
 ### Obtain API Key
 
-Get your API key from [GLMap User Dashboard](https://user.getyourmap.com/users/sign_in).
+Get your API key at [GLMap User Dashboard](https://user.globus.software/apps/).
 
 ### Initialize GLMap
 

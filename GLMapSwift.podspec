@@ -11,7 +11,6 @@ DESC
   s.homepage = "https://globus.software"
   s.license = { :type => 'Apache 2.0' }
   s.author = { "Evgen Bodunov" => "evgen@globus.software" }
-  s.social_media_url = "https://twitter.com/GLMapFramework"
   s.documentation_url = "https://globus.software/docs/swift/api/#{s.version.to_s}/"
   s.swift_version = '5.2'
 

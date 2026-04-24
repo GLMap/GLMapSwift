@@ -14,7 +14,7 @@ import GLMapCore
 public extension GLMapManager {
     /**
      Activates map manager with API key.
-     It could be obtained at https://user.getyourmap.com
+     It can be obtained at https://user.globus.software/apps/
 
      @param apiKey API key
      */
