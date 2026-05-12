@@ -95,7 +95,7 @@ area {
     }
 
     // generalized buildings
-    |z11-12[landuse=residential]{
+    |z11-13[landuse=residential]{
         z-index: -14;
         fill-color: @color_landuse_residential;
     }
@@ -201,6 +201,10 @@ area {
         |z15-{
             [natural=wood], [landuse=forest] {
                 fill-image: @image_wood;
+                [leaf_type=broadleaved] { fill-image: @image_wood_broadleaved; }
+                [leaf_type=needleleaved] { fill-image: @image_wood_needleleaved; }
+                [leaf_type=mixed] { fill-image: @image_wood_mixed; }
+                [leaf_type=leafless] { fill-image: @image_wood_leafless; }
             }
             [leisure=garden] {
                 fill-image: @image_garden;
@@ -384,7 +388,7 @@ area {
     // all buildings
     [building] {
         @if SubStyle != Car
-            |z13-{
+            |z14-{
                 z-index: 3;
                 fill-color: @color_building;
             }
