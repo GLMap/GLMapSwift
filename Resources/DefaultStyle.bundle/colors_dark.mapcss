@@ -156,6 +156,7 @@
 
 @color_railway: #1E4810;
 @color_railway_dashes: #7F7F7F;
+@color_railway_disused: #606060AA;
 
 @color_icon_ford: #2A98EF;
 @color_text_ford: #2A98EF;

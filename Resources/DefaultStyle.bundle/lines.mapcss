@@ -604,20 +604,24 @@ line {
             galileo-stencil-ref: 4;
             linecap: none;
             z-index: 6;
-            [service=yard] {
-                width: none;
-                dashes-width: none;
-                |z13- {
-                    width: 2pt;
-                    dashes-width: 1pt;
-                }
-            }
             |z15- {
                 //                       17   18
                 width: eval( zlinear(17, 4pt, 6pt) );
                 fill-image: "railway.svg";
                 dashes-width: none;
                 galileo-stencil-type: none;
+            }
+            [service=yard],
+            [service=siding],
+            [service=spur],
+            [service=crossover] {
+                width: none;
+                dashes-width: none;
+                fill-image: none;
+                |z13- {
+                    width: 2pt;
+                    dashes-width: 1pt;
+                }
             }
         }
 
@@ -659,6 +663,28 @@ line {
             z-index: 1;
         }
 
+        |z14-[railway=monorail] {
+            width: eval( zlinear(15, 2pt, 3pt ) );
+            dashes-width: 1pt;
+            dashes-color: @color_railway_dashes;
+            dashes: 8, 4;
+            z-index: 1;
+        }
+
+        |z15-[railway=disused] {
+            dashes-width: 1pt;
+            dashes-color: @color_railway_disused;
+            dashes: 5, 7;
+            z-index: 0;
+        }
+
+        |z16-[railway=miniature] {
+            dashes-width: 1pt;
+            dashes-color: @color_railway_dashes;
+            dashes: 2, 4;
+            z-index: 1;
+        }
+
         |z15-{
             [layer<0],
             [tunnel] {
@@ -670,12 +696,28 @@ line {
             }
         }
 
+        |z15-[railway=construction] {
+            width: 1pt;
+            color: @color_road_construction;
+            dashes-width: 2pt;
+            dashes-color: @color_road_construction;
+            dashes: 14, 10;
+            z-index: 1;
+        }
+
         |z15-[bridge] {
             casing-color: @color_bridge;
             casing-width: 1pt;
             linecap: none;
             z-index: 6;
         }
+    }
+
+    |z15-[disused:railway] {
+        dashes-width: 1pt;
+        dashes-color: @color_railway_disused;
+        dashes: 5, 7;
+        z-index: 0;
     }
 
     |z13-{
