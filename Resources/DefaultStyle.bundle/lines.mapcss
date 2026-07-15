@@ -315,12 +315,14 @@ line {
                 }
             }
         @elif SubStyle != Car
+            // Solid line (OSM-like) instead of dashes; all-pedestrian areas such as Venice
+            // would otherwise become a wall of dashes.
             [highway=pedestrian] {
                 //                              13   14   15   16   17
-                width:        eval( zlinear(13, 2pt, 4pt, 5pt, 5pt, 6pt ) );
-                dashes-width: eval( zlinear(13, 1pt, 2pt, 3pt, 3pt, 4pt ) );
-                dashes-color: @color_pedestrian;
-                dashes: 8, 4;
+                width:        eval( zlinear(13, 1pt, 2pt, 3pt, 4pt, 6pt ) );
+                color: @color_pedestrian;
+                casing-color: @color_pedestrian_casing;
+                casing-width: eval( zlinear(13, 0pt, 0.5pt, 1pt ) );
             }
         @endif
     }

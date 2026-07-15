@@ -112,6 +112,8 @@
 // roads of all kinds
 @color_small_road: #666666;
 @color_small_road_casing: #4C4C4C;
+@color_pedestrian: #323232;
+@color_pedestrian_casing: #545454;
 @color_bridge: #6C7175;
 @color_railroad_tunnel: #6C7175AA;
 @color_cycleway_dashes: #2638C1;
@@ -137,8 +139,6 @@
     @color_secondary_casing: @color_small_road_casing;
     @color_secondary: @color_small_road;
     @color_tertiary: @color_small_road;
-    @color_pedestrian: #323232;
-    @color_pedestrian_casing: #545454;
 @else
     @color_footway_dashes: #94615A;
     @color_path_dashes: @color_footway_dashes;
@@ -151,7 +151,6 @@
     @color_secondary_casing: #C69A16;
     @color_secondary: #BA8C00;
     @color_tertiary: @color_small_road;
-    @color_pedestrian: @color_small_road;
 @endif
 
 @color_railway: #1E4810;
