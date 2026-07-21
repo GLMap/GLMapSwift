@@ -29,12 +29,14 @@ public extension GLMapManager {
 }
 
 extension GLMapPoint: @retroactive Equatable {
+    /// Returns whether two projected points have identical coordinates.
     public static func == (lhs: GLMapPoint, rhs: GLMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
 }
 
 extension GLMapGeoPoint: @retroactive Equatable {
+    /// Returns whether two geographic points have identical coordinates.
     public static func == (lhs: GLMapGeoPoint, rhs: GLMapGeoPoint) -> Bool {
         return lhs.lat == rhs.lat && lhs.lon == rhs.lon
     }
@@ -48,6 +50,7 @@ public extension GLMapGeoPoint {
 }
 
 extension GLMapBBox: @retroactive Equatable {
+    /// Returns whether two bounding boxes have identical origins and sizes.
     public static func == (lhs: GLMapBBox, rhs: GLMapBBox) -> Bool {
         return lhs.origin == rhs.origin && lhs.size == rhs.size
     }
