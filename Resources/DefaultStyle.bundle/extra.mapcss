@@ -9,6 +9,14 @@ line {
             color: black;
         }
     }
+    // Keep minor roads in z9-band tiles for custom styles (drawn from z12 there).
+    |z12-{
+        [highway=unclassified],
+        [highway=track] {
+            width: 1px;
+            color: black;
+        }
+    }
     |z13-{
         [highway][surface] {
             width: 1px;
@@ -51,6 +59,11 @@ area {
 
 // To keep this text in 9th zoom level tiles
 node {
+    |z9-[highway=motorway_junction] {
+        text: eval(tag('ref'));
+        text-color: red;
+    }
+
     |z11-(
         [natural=peak],
         [natural=saddle],

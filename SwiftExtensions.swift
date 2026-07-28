@@ -6,13 +6,15 @@
 //  Copyright © 2016 Evgen Bodunov. All rights reserved.
 //
 
+import CoreLocation
 import Foundation
+import GLMap
 import GLMapCore
 
 public extension GLMapManager {
     /**
      Activates map manager with API key.
-     It could be obtained at https://user.getyourmap.com
+     It can be obtained at https://user.globus.software/apps/
 
      @param apiKey API key
      */
@@ -27,18 +29,28 @@ public extension GLMapManager {
 }
 
 extension GLMapPoint: @retroactive Equatable {
+    /// Returns whether two projected points have identical coordinates.
     public static func == (lhs: GLMapPoint, rhs: GLMapPoint) -> Bool {
         return lhs.x == rhs.x && lhs.y == rhs.y
     }
 }
 
 extension GLMapGeoPoint: @retroactive Equatable {
+    /// Returns whether two geographic points have identical coordinates.
     public static func == (lhs: GLMapGeoPoint, rhs: GLMapGeoPoint) -> Bool {
         return lhs.lat == rhs.lat && lhs.lon == rhs.lon
     }
 }
 
+public extension GLMapGeoPoint {
+    /// Convenience initializer bridging from CoreLocation.
+    init(location: CLLocation) {
+        self.init(lat: location.coordinate.latitude, lon: location.coordinate.longitude)
+    }
+}
+
 extension GLMapBBox: @retroactive Equatable {
+    /// Returns whether two bounding boxes have identical origins and sizes.
     public static func == (lhs: GLMapBBox, rhs: GLMapBBox) -> Bool {
         return lhs.origin == rhs.origin && lhs.size == rhs.size
     }
@@ -146,3 +158,19 @@ public extension GLMapTrackData {
         self.init(points: points, count: UInt(points.count))
     }
 }
+
+#if swift(>=5.5)
+    @MainActor
+    public extension GLMapView {
+        /// Async/await wrapper around `animate(_:withCompletion:)`.
+        /// - Returns: `true` when the animation finished normally, `false` when it was canceled.
+        @discardableResult
+        func animate(_ animations: (GLMapAnimation) -> Void) async -> Bool {
+            await withCheckedContinuation { continuation in
+                _ = animate(animations, withCompletion: { finished in
+                    continuation.resume(returning: finished)
+                })
+            }
+        }
+    }
+#endif
