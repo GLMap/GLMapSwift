@@ -36,23 +36,23 @@ let package = Package(
         ),
         .binaryTarget(
             name: "GLMapCore",
-            url: "https://globus.software/download/GLMapCore-2.0.0.zip",
-            checksum: "5a30d5593b5963cac06c1d1c3a1bb09d71585ff993ab9209f9a0f505fb93b313"
+            url: "https://globus.software/download/GLMapCore-2.0.1.zip",
+            checksum: "6af69ebd0a48dc0d4afe021a8da226d9dcd583369d263c4b3032ad20c31446ed"
         ),
         .binaryTarget(
             name: "GLMap",
-            url: "https://globus.software/download/GLMap-2.0.0.zip",
-            checksum: "f03ef0c6d723647b229a64f41532d47d6f58c55fd27e9cba042b5425f9f73831"
+            url: "https://globus.software/download/GLMap-2.0.1.zip",
+            checksum: "e0917f61b0bb58b0745c813df6b1839a6f2597a0bd3257df7e58f9d6d1cddd8d"
         ),
         .binaryTarget(
             name: "GLSearch",
-            url: "https://globus.software/download/GLSearch-2.0.0.zip",
-            checksum: "aa30104eacf3ad8fb74797881d195be741057dd828a36c60e4eeca6cdba03019"
+            url: "https://globus.software/download/GLSearch-2.0.1.zip",
+            checksum: "95718d0db9e8ac627c97376ee480fb06efb4a328318c39ca4947c5c04a419328"
         ),
         .binaryTarget(
             name: "GLRoute",
-            url: "https://globus.software/download/GLRoute-2.0.0.zip",
-            checksum: "e48f5bbbbd54602862ae635648690ef447090c659a4b3b54c4690d5f52772587"
+            url: "https://globus.software/download/GLRoute-2.0.1.zip",
+            checksum: "cf639ab65d225b152f43c122038881dd26e51eaa018089fb24c0ee74d72d83f4"
         ),
     ]
 )
