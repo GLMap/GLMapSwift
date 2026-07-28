@@ -56,23 +56,13 @@ extension GLMapBBox: @retroactive Equatable {
     }
 }
 
-public extension GLMapPointArray {
+public extension GeometryBuilder {
     /**
-     Creates new GLMapPointArray and adds points to it
-     @param lat Latitude in degrees
-     @param lon Longitude in degrees
-     */
-    convenience init(_ points: [GLMapPoint]) {
-        self.init()
-        addPoints(points)
-    }
-
-    /**
-     Adds points to array
+     Adds line
      @param line Array of map points
      */
-    func addPoints(_ points: [GLMapPoint]) {
-        addPoints(points, count: UInt(points.count))
+    func addLine(_ points: [GLMapPoint]) {
+        addLine(points, count: UInt(points.count))
     }
 }
 
