@@ -824,7 +824,7 @@ line {
     |z11-[highway=secondary] {
         text: eval(any(tag('ref'), tag('int_ref')));
     }
-
+    
     // highway names
     |z13-(
         [highway=motorway],
