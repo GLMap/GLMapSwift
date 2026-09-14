@@ -17,14 +17,16 @@ public extension GLMapManager {
      It can be obtained at https://user.globus.software/apps/
 
      @param apiKey API key
+     @return `false` if resources are missing from the bundle or the storage path is not writable.
      */
-    static func activate(apiKey: String, resources: Bundle? = nil, storage: String? = nil) {
+    @discardableResult
+    static func activate(apiKey: String, resources: Bundle? = nil, storage: String? = nil) -> Bool {
         #if SWIFT_PACKAGE
             let res = resources ?? Bundle.module
         #else
             let res = resources
         #endif
-        activate(withApiKey: apiKey, resourcesBundle: res, andStoragePath: storage)
+        return activate(withApiKey: apiKey, resourcesBundle: res, andStoragePath: storage)
     }
 }
 
