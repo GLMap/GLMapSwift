@@ -1,95 +1,92 @@
 # GLMap Swift Package
 
-The official Swift Package Manager distribution of GLMap SDK 2.0. The package provides binary frameworks for map rendering, search, and routing together with the Swift extensions and resources needed to start an application.
-
-Supported platforms:
-
-- iOS 13 or later;
-- macOS 11 or later.
-
-## Add the package
-
-In Xcode, select **File → Add Package Dependencies** and enter:
+The official SwiftPM distribution of the native GLMap SDK. One package URL offers
+independently selectable Core, Map, Search and Route products:
 
 ```text
 https://github.com/GLMap/GLMapSwift.git
 ```
 
-Select version `2.0.0` or later and add the products your application uses:
+## Products and modules
 
-| Product | Purpose |
-| --- | --- |
-| `GLMap` | Map rendering, Swift extensions, default style, fonts, and world overview map |
-| `GLSearch` | Online and offline search |
-| `GLRoute` | Online and offline routing |
+- **GLMapCore** supplies the Core binary, the `GLMapCoreSwift` conveniences, and
+  the shared resources required for initialization. It has no renderer dependency.
+- **GLMap** supplies the Map binary and the `GLMapSwift` conveniences, and depends
+  on Core. Existing Map applications can continue selecting this product.
+- **GLSearch** supplies Search and Core, without Map or Route.
+- **GLRoute** supplies Route and Core, without Map or Search.
 
-`GLSearch` and `GLRoute` are optional additions to the main `GLMap` product.
+The resource target also retains the default style so existing callers of
+`GLMapManager.shared.resourcesBundle` continue to find it. Sharing data resources
+is not a dependency on the renderer framework.
 
-For a manifest-based project:
+This source tree prepares the modular release. The release workflow selects the
+binary versions/checksums before tagging; use the generated local package for
+unpublished native SDK changes rather than mixing drafts with an older release.
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/GLMap/GLMapSwift.git", from: "2.0.0"),
-],
-targets: [
-    .target(
-        name: "MyApp",
-        dependencies: [
-            .product(name: "GLMap", package: "GLMapSwift"),
-            .product(name: "GLSearch", package: "GLMapSwift"),
-            .product(name: "GLRoute", package: "GLMapSwift"),
-        ]
-    ),
-]
-```
+## Existing Map applications
 
-## Show a map
-
-Get an API key from the [GLMap User Dashboard](https://user.globus.software/apps/) and activate GLMap once during application startup, before creating a map view:
+The package URL and the products `GLMap`, `GLSearch`, and `GLRoute` are preserved.
+The traditional imports continue to work:
 
 ```swift
 import GLMap
+import GLMapCore
 import GLMapSwift
 
-GLMapManager.activate(apiKey: <#API key#>)
+GLMapManager.activate(apiKey: apiKey)
 ```
 
-Then create `GLMapView` like a regular platform view:
+`GLMapSwift` re-exports `GLMapCoreSwift`. The Core geometry, activation, track and
+notification extensions remain visible to source clients using the old import.
+Marker and animation conveniences stay in `GLMapSwift`.
+
+The native repository's non-SPM `GLMapSwift.framework` target compiles both Swift
+source files together, preserving its original convenience-module layout.
+
+## Headless services
+
+Select `GLMapCore`, `GLSearch`, or `GLRoute` as needed, without selecting `GLMap`.
+For example, a search-only application's target dependencies are:
 
 ```swift
-final class MapViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        let mapView = GLMapView(frame: view.bounds)
-        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        mapView.mapGeoCenter = GLMapGeoPoint(lat: 41.1579, lon: -8.6291)
-        mapView.mapZoomLevel = 14
-        view.addSubview(mapView)
-
-        GLMapManager.shared.tileDownloadingAllowed = true
-    }
-}
+.product(name: "GLMapCore", package: "GLMapSwift"),
+.product(name: "GLSearch", package: "GLMapSwift"),
 ```
 
-`GLMapView` loads the packaged default style automatically. Setting `tileDownloadingAllowed` to `true` permits the SDK to download online map data; downloaded maps can also be used fully offline.
+Initialize once before native operations:
 
-## Package resources
+```swift
+import GLMapCore
+import GLMapCoreSwift
+import GLSearch
 
-When installed through Swift Package Manager, `GLMapManager.activate(apiKey:)` automatically uses `Bundle.module`. The package includes:
+let initialized = GLMapManager.activate(apiKey: apiKey)
+```
 
-- `DefaultStyle.bundle`;
-- the default fonts;
-- `world.vm`, used for the low-zoom world overview.
+Map, Search and Route all share the same native Core manager. Do not initialize
+separate managers for each feature. The empty key permits local/offline SDK use;
+authenticated online services require your own key.
 
-Pass a custom `resources` bundle or `storage` path to `activate(apiKey:resources:storage:)` only when your application intentionally overrides these defaults.
+## Resources and compatibility boundary
 
-## Examples and documentation
+Core's activation convenience selects its SwiftPM resource bundle automatically.
+Use `GLMapManager.shared.resourcesBundle` or pass an explicit `resources` bundle;
+do not hardcode SwiftPM's generated bundle filename.
 
-- [iOS examples](https://github.com/GLMap/examples-ios) — compact UIKit and SwiftUI applications using this package;
-- [GLMap documentation](https://globus.software/docs);
-- [support@globus.software](mailto:support@globus.software).
+The new generated bundle is `GLMap_GLMapCoreSwift.bundle`, not the former
+`GLMap_GLMapSwift.bundle`. Normal SDK-based resource lookup remains supported;
+code relying on the old internal filename must be migrated.
 
-## License
+Moving Swift extensions to another Swift module is source-compatible through the
+re-export, but it is not an ABI guarantee for precompiled code that references old
+Swift symbols. Rebuild binary consumers. This change does not rename the native
+Objective-C framework modules or their public classes.
 
-The Swift wrapper source is available under the Apache License 2.0. The bundled GLMap binary frameworks are distributed under the GLMap SDK license.
+## Binary-only embedding products
+
+`GLMapBinary`, `GLSearchBinary`, and `GLRouteBinary` are advanced embedding products
+containing only their native framework. They let multi-plugin hosts give the static
+Swift conveniences and resource bundle exactly one owner (for example, a shared RN
+Core pod). Such hosts must provide Core separately. Normal Swift applications
+should use the main products above.

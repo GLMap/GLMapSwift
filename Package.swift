@@ -7,32 +7,44 @@ let package = Package(
         .macOS(.v11), .iOS(.v13),
     ],
     products: [
+        // Binary-only products let plugin hosts give Swift conveniences one owner.
+        .library(name: "GLMapBinary", targets: ["GLMap"]),
+        .library(name: "GLSearchBinary", targets: ["GLSearch"]),
+        .library(name: "GLRouteBinary", targets: ["GLRoute"]),
+        .library(name: "GLMapCore", targets: ["GLMapCore", "GLMapCoreSwift"]),
         .library(
             name: "GLMap",
             targets: ["GLMap", "GLMapCore", "GLMapSwift"]
         ),
         .library(
             name: "GLSearch",
-            targets: ["GLSearch", "GLMapCore"]
+            targets: ["GLSearch", "GLMapCore", "GLMapCoreSwift"]
         ),
         .library(
             name: "GLRoute",
-            targets: ["GLRoute", "GLMapCore"]
+            targets: ["GLRoute", "GLMapCore", "GLMapCoreSwift"]
         ),
     ],
     targets: [
         .target(
-            name: "GLMapSwift",
-            dependencies: ["GLMap", "GLMapCore"],
+            name: "GLMapCoreSwift",
+            dependencies: ["GLMapCore"],
             path: ".",
-            exclude: ["README.md", "LICENSE.txt", "GLMapSwift.podspec", "GLMapSwift-Info.plist"],
-            sources: ["SwiftExtensions.swift"],
+            exclude: ["SwiftExtensions.swift", "README.md", "LICENSE.txt"],
+            sources: ["CoreSwiftExtensions.swift"],
             resources: [
                 .copy("Resources/world.vm"),
                 .copy("Resources/fonts"),
                 .copy("Resources/DefaultStyle.bundle"),
             ],
             swiftSettings: [.define("SWIFT_PACKAGE")]
+        ),
+        .target(
+            name: "GLMapSwift",
+            dependencies: ["GLMap", "GLMapCore", "GLMapCoreSwift"],
+            path: ".",
+            exclude: ["CoreSwiftExtensions.swift", "Resources", "README.md", "LICENSE.txt"],
+            sources: ["SwiftExtensions.swift"]
         ),
         .binaryTarget(
             name: "GLMapCore",
