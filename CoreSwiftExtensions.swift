@@ -1,5 +1,5 @@
 //
-//  SwiftExtensions.swift
+//  CoreSwiftExtensions.swift
 //  GLMap
 //
 //  Created by Evgen Bodunov on 11/18/16.

@@ -2,7 +2,7 @@
 import GLMap
 import GLMapCore
 #if SWIFT_PACKAGE
-@_exported import GLMapCoreSwift
+    @_exported import GLMapCoreSwift
 #endif
 
 public extension GLMapMarkerData {
