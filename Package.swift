@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "GLMap",
     platforms: [
-        .macOS(.v11), .iOS(.v13),
+        .macOS("12.0"), .iOS("15.0"),
     ],
     products: [
         // Binary-only products let plugin hosts give Swift conveniences one owner.
