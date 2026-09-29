@@ -16,7 +16,11 @@ public extension GLMapManager {
      It can be obtained at https://user.globus.software/apps/
 
      @param apiKey API key
-     @return `false` if resources are missing from the bundle or the storage path is not writable.
+     @param resources Bundle containing SDK resources. If `nil`, uses the SwiftPM resource bundle
+     when built as a Swift package, or the main bundle otherwise.
+     @param storage Writable map storage directory. If `nil`, uses the application's Documents directory.
+     @return `false` if required resources are missing from the bundle or the storage path is not writable.
+     This result does not validate the API key.
      */
     @discardableResult
     static func activate(apiKey: String, resources: Bundle? = nil, storage: String? = nil) -> Bool {
@@ -59,8 +63,8 @@ extension GLMapBBox: @retroactive Equatable {
 
 public extension GeometryBuilder {
     /**
-     Adds line
-     @param line Array of map points
+     Adds a line to the geometry being built.
+     @param points Ordered array of points in internal map coordinates.
      */
     func addLine(_ points: [GLMapPoint]) {
         addLine(points, count: UInt(points.count))

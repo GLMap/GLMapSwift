@@ -19,6 +19,7 @@ public extension GLMapMarkerData {
      Sets text to the marker.
 
      @param text Text displayed by marker
+     @param alignment Alignment of the text relative to the marker. If `.undefined`, alignment is derived from `offset`.
      @param offset Offset of the text center relative to the marker center
      @param style Text style
      */
