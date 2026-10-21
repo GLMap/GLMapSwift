@@ -467,7 +467,7 @@ line {
                     |z15-{
                         text: eval(any(locTag('name'), tag('ref')));
                         text-color: @color_label_text;
-                        font-size: 12;
+                        font-size: eval(zlinear(15, 11.5, 12, 12.4, 12.8, 13.1));
                         font-stroke-width: 2pt;
                         font-stroke-color: @color_label_stroke;
                     }
@@ -801,28 +801,44 @@ line {
 
     /******************** Line names *************************/
 
-    // road references
-    |z9-(
-        [highway=motorway],
-        [highway=trunk],
-        [highway=primary]
-    ),
-    |z10-[highway=secondary] {
-        text: eval(any(tag('int_ref'), tag('ref')));
-        text-color: @color_suburb_text;
-        font-size: 8;
-        font-stroke-width: 1pt;
-        font-stroke-color: @color_label_stroke;
+    // Road number shields, next to the road name from z13. Colours are those most countries sign: motorways green,
+    // main roads blue, secondary roads yellow, lower roads a white plate; regional/ recolours other countries and
+    // keeps E-roads green. Zooms follow Mapy.cz: E-roads from z8, motorways from z9, main roads from z11, secondary
+    // from z12, tertiary from z14.
+    |z8([highway=motorway][int_ref], [highway=trunk][int_ref]) {
+        shield-image: "shield.svg";
+        shield-text: eval(listItem(tag('int_ref'), 0));
+        shield-color: @color_shield_green;
         text-priority: 4;
+        shield-priority: -20;
     }
-
-    |z10-(
-        [highway=motorway],
+    |z9-[highway=motorway],
+    |z11-(
         [highway=trunk],
         [highway=primary]
     ),
-    |z11-[highway=secondary] {
-        text: eval(any(tag('ref'), tag('int_ref')));
+    |z12-[highway=secondary],
+    |z14-[highway=tertiary] {
+        shield-image: "shield.svg";
+        shield-text: eval(any(listItem(tag('ref'), 0), listItem(tag('int_ref'), 0)));
+        shield-color: @color_shield_blue;
+        text-priority: 4;
+        // shields are placed after every name and POI, the main roads first
+        [highway=motorway] {
+            shield-color: @color_shield_green;
+            shield-priority: -20;
+        }
+        [highway=trunk] { shield-priority: -21; }
+        [highway=primary] { shield-priority: -22; }
+        [highway=secondary] {
+            shield-color: @color_shield_yellow;
+            shield-priority: -23;
+        }
+        [highway=tertiary] {
+            shield-image: "shield_plate.svg";
+            shield-color: @color_shield_white;
+            shield-priority: -24;
+        }
     }
     
     // highway names
@@ -832,9 +848,10 @@ line {
         [highway=primary]
     ),
     |z14-[highway=secondary] {
-        text: eval(any(locTag('name'), tag('ref'), tag('int_ref')));
+        // the number is on the shield
+        text: eval(locTag('name'));
         text-color: @color_label_text;
-        font-size: 11;
+        font-size: eval(zlinear(13, 10, 10.5, 11, 11.5, 11.9, 12.3, 12.6));
         font-stroke-width: 2pt;
         font-stroke-color: @color_label_stroke;
         text-priority: 5;
@@ -849,14 +866,6 @@ line {
         }
     }
 
-    // bigger font size from zoom 11
-    |z10-[highway=primary],
-    |z10-[highway=secondary],
-    |z11-[highway=motorway],
-    |z11-[highway=trunk] {
-        font-size: 10;
-    }
-
     |z15-{
         [highway=residential],
         [highway=living_street],
@@ -869,7 +878,7 @@ line {
             text: eval(any(locTag('name'), tag('ref')));
             text-priority: 4;
             text-color: @color_label_text;
-            font-size: 10;
+            font-size: eval(zlinear(15, 10, 10.4, 10.8, 11.2, 11.5));
             font-stroke-width: 1pt;
             font-stroke-color: @color_label_stroke;
         }
@@ -884,7 +893,7 @@ line {
             text: eval(any(locTag('name'), tag('ref')));
             text-priority: 3;
             text-color: @color_label_text;
-            font-size: 10;
+            font-size: eval(zlinear(15, 10, 10.4, 10.8, 11.2, 11.5));
             font-stroke-width: 1pt;
             font-stroke-color: @color_label_stroke;
         }
@@ -901,10 +910,17 @@ line {
     |z17-[waterway=stream] {
         text: eval(locTag('name'));
         text-color: @color_water_text;
-        font-size: 11;
+        font-size: eval(zlinear(13, 10.5, 11, 11.5, 12, 12.4, 12.8, 13.1));
+        font-style: italic;
         font-stroke-width: 2pt;
         font-stroke-color: @color_water_stroke;
         text-priority: -5;
+        [waterway=river] {
+            text-letter-spacing: 0.1;
+        }
+        [waterway=stream] {
+            font-size: eval(zlinear(17, 10.5, 11, 11.4));
+        }
     }
 
     |z13-[aerialway] { // chair_lift, cable_car, drag_lift
@@ -916,7 +932,7 @@ line {
         |z15-{
             text: eval(any(locTag('name'), tag('ref')));
             text-color: @color_aerialway_text;
-            font-size: 12;
+            font-size: eval(zlinear(15, 11.5, 12, 12.4, 12.8, 13.1));
             font-stroke-width: 2pt;
             font-stroke-color: @color_label_stroke;
         }
@@ -947,6 +963,8 @@ line {
 
             text: eval(locTag('name'));
             text-color: #6C6259;
+            font-size: eval(zlinear(16, 11.5, 12, 12.4, 12.8));
+            font-style: italic;
         }
     }
     |z12-[natural=ridge] {
@@ -954,7 +972,10 @@ line {
         color: brown;
         |z15-{
             text: eval(locTag('name'));
-            text-color: brown;
+            text-color: @color_text_peak;
+            font-size: eval(zlinear(15, 11.5, 12, 12.4, 12.8, 13.1));
+            font-style: italic;
+            text-letter-spacing: 0.15;
         }
     }
 }

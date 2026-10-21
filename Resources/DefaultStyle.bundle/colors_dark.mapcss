@@ -54,8 +54,11 @@
 @color_ferry_route: #2A80C4;
 
 @color_label_text: #E0DFDD;
-@color_name_text: #D3D2D0;
-@color_suburb_text: #9A9C9E;
+@color_label_new_text: #A9AAAC;
+@color_name_text: #CFC9D6;
+@color_region_text: #ABA4B3;
+@color_suburb_text: #B0B2B4;
+@color_quarter_text: #9A9C9E;
 @color_national_park_text: #ABCA88;
 @color_building_text: #99836B;
 @color_entrance_text: #998167;
@@ -63,7 +66,7 @@
 @color_private_access_text: #F07573;
 @color_label_stroke: #000000EE;
 
-@color_water_text: #72AFE0;
+@color_water_text: #88C5F7;
 @color_water_stroke: #000000B3;
 @color_aerialway_text: #FFFFFF;
 @color_shop_text: #F9D8A3;
@@ -95,7 +98,7 @@
 @color_text_transport: @color_icon_transport;
 
 @color_icon_hotels: #9575CD;
-@color_text_hotels: @color_icon_hotels;
+@color_text_hotels: #9777CF;
 @color_icon_beauty: #F48FB1;
 @color_text_beauty: @color_icon_beauty;
 
@@ -162,3 +165,24 @@
 @color_icon_fountain: @color_icon_ford;
 
 @color_rock: #565656;
+
+// Road number shields in road sign colours, a step darker than in daylight: the tint colours shield.svg, the engine picks
+// white or dark text for contrast (dark text above luminance 0.6, which keeps black numbers on yellow)
+@color_shield_red: #A3111A;
+@color_shield_green: #2A6E3C;
+@color_shield_blue: #0B4A78;
+@color_shield_yellow: #D4A000;
+@color_shield_yellow_text: #1E1E1E;
+@color_shield_white: #4A4A4A; // a dark grey plate instead of the white one, which glares on the dark map
+@color_shield_orange: #D27A00; // Turkish otoyol
+@color_shield_white_text: #FFFFFF;
+@color_shield_gold_text: #FFC000; // Cyprus
+@color_shield_uk_green: #0B5E33; // British and Irish primary routes: yellow numbers on green
+@color_shield_uk_yellow: #F2C500;
+@color_shield_plate_blue_text: #8CC0EE; // blue numbers on the grey plate (Turkish provincial roads)
+
+// Route palette for mapColor(): OSM colour names of route relations, other colours snap to the nearest entry.
+// The same Material hues as the POI icons, a step stronger so lines read on the map.
+@route_palette: "red:#EF5350, orange:#FFA726, yellow:#FFD54F, green:#66BB6A, blue:#42A5F5, purple:#AB47BC, violet:#AB47BC, brown:#A1887F, grey:#A7AFB4, gray:#A7AFB4, black:#78909C, white:#ECEFF1, pink:#F06292";
+// Translucent bands of hiking and bicycle routes under the ways: the same hues, light ones more opaque so all read alike
+@route_band_palette: "red:#EF535070, orange:#FFA72670, yellow:#FFD54F80, green:#66BB6A80, blue:#42A5F570, purple:#AB47BC70, violet:#AB47BC70, brown:#A1887F90, grey:#A7AFB490, gray:#A7AFB490, black:#78909C90, white:#ECEFF180, pink:#F0629270";
